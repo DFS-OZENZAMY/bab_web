@@ -217,6 +217,9 @@ label{display:grid;gap:.35rem;font-size:.9rem;color:#C6CBEB}
 input,select,textarea{font:inherit;font-weight:400;padding:.8rem 1rem;border-radius:12px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:#fff}
 select option{color:#141A3A}
 textarea{min-height:110px;resize:vertical}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+label.check{display:flex;gap:.6rem;align-items:flex-start;font-size:.85rem;line-height:1.45}
+label.check input{width:1.1rem;height:1.1rem;margin-top:.15rem;flex:none;accent-color:#F2B33D;padding:0}
 .form-note{font-size:.88rem;min-height:1.2em;margin:0;color:var(--safran)}
 .direct{display:grid;gap:.9rem;margin-top:2rem}
 .direct a{display:flex;align-items:center;gap:.8rem;text-decoration:none;color:#fff;font-size:1.05rem}
@@ -400,16 +403,18 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem}
     </div>
 
     <form id="devis" novalidate>
-      <input type="hidden" name="access_key" value="VOTRE_CLE_WEB3FORMS">
-      <input type="hidden" name="subject" value="Nouvelle demande de devis - Bab Web">
       <label>Votre nom<input name="nom" required autocomplete="name"></label>
       <label>Téléphone ou WhatsApp<input name="telephone" type="tel" required autocomplete="tel" placeholder="06 00 00 00 00"></label>
+      <label>Email (pour recevoir notre proposition)<input name="email" type="email" autocomplete="email" placeholder="vous@exemple.ma"></label>
+      <label>Ville<input name="ville" autocomplete="address-level2" placeholder="Ex. : Marrakech"></label>
       <label>Formule souhaitée
         <select name="formule" id="formule">
           <option>Je ne sais pas encore</option><option>Essentiel</option><option>Business</option><option>Premium</option>
         </select>
       </label>
-      <label>Votre activité<textarea name="message" placeholder="Ex. : restaurant à Marrakech, je veux afficher mon menu et recevoir des réservations."></textarea></label>
+      <label>Votre activité<textarea name="message" placeholder="Ex. : restaurant de cuisine marocaine, je veux afficher mon menu et recevoir des réservations."></textarea></label>
+      <label class="hp" aria-hidden="true">Ne pas remplir<input name="site_web_hp" tabindex="-1" autocomplete="off"></label>
+      <label class="check"><input type="checkbox" name="consentement" value="oui"> J'accepte que Bab Web utilise ces informations pour me recontacter au sujet de ma demande (loi 09-08).</label>
       <button class="btn" type="submit">Envoyer ma demande</button>
       <p class="form-note" id="form-note" role="status"></p>
     </form>
@@ -458,24 +463,31 @@ document.querySelectorAll('[data-pack]').forEach(a => a.addEventListener('click'
   document.getElementById('formule').value = a.dataset.pack;
 }));
 
-// Formulaire (Web3Forms, gratuit)
+// Formulaire : envoi vers /api/lead, WhatsApp en solution de secours
 const form = document.getElementById('devis'), note = document.getElementById('form-note');
+const WHATSAPP = '212600000000';
+function ouvrirWhatsApp() {
+  const txt = `Bonjour, je suis ${form.nom.value}${form.ville.value ? ' (' + form.ville.value + ')' : ''}. Formule : ${form.formule.value}. ${form.message.value}`;
+  window.open('https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(txt), '_blank');
+}
 form.addEventListener('submit', async e => {
   e.preventDefault();
   if (!form.nom.value.trim() || !form.telephone.value.trim()) { note.textContent = 'Indiquez votre nom et votre numéro pour que je puisse vous répondre.'; return; }
-  const key = form.access_key.value;
-  if (key.startsWith('VOTRE')) {
-    const txt = `Bonjour, je suis ${form.nom.value}. Formule : ${form.formule.value}. ${form.message.value}`;
-    window.open('https://wa.me/212600000000?text=' + encodeURIComponent(txt), '_blank');
-    note.textContent = 'Votre demande s\'ouvre dans WhatsApp.'; return;
-  }
-  note.textContent = 'Envoi en cours…';
+  if (form.email.value && !form.email.checkValidity()) { note.textContent = 'Vérifiez votre adresse email.'; return; }
+  const btn = form.querySelector('button[type=submit]');
+  btn.disabled = true; note.textContent = 'Envoi en cours…';
   try {
-    const r = await fetch('https://api.web3forms.com/submit', {method:'POST', body:new FormData(form)});
+    const r = await fetch('/api/lead', { method: 'POST', body: new FormData(form) });
     const j = await r.json();
-    note.textContent = j.success ? 'Demande envoyée. Je vous réponds sous 24 heures.' : 'L\'envoi a échoué. Écrivez-moi directement sur WhatsApp.';
-    if (j.success) form.reset();
-  } catch { note.textContent = 'L\'envoi a échoué. Écrivez-moi directement sur WhatsApp.'; }
+    if (!j.ok) throw new Error(j.error || 'erreur');
+    note.textContent = form.email.value && form.consentement.checked
+      ? 'Demande envoyée. Vous allez recevoir un email de notre part, et je vous recontacte sous 24 heures.'
+      : 'Demande envoyée. Je vous recontacte sous 24 heures.';
+    form.reset();
+  } catch {
+    note.textContent = 'L\'envoi n\'a pas fonctionné : votre demande s\'ouvre dans WhatsApp.';
+    ouvrirWhatsApp();
+  } finally { btn.disabled = false; }
 });
 </script>
 </body>

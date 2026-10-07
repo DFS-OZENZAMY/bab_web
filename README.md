@@ -18,3 +18,10 @@ Framework preset : None · Build command : (vide) · Output directory : /
   `https://bab-web.pages.dev` partout dans `index.html`, `robots.txt` et `sitemap.xml`.
 - Remplace aussi le téléphone et l'email dans le bloc `application/ld+json` de `index.html`.
 - Après la mise en ligne : ajoute le site dans Google Search Console et envoie `sitemap.xml`.
+
+## Système de leads (functions/api/lead.js)
+Chaque demande du formulaire : notification Telegram + email pour toi, email personnalisé (IA) pour le prospect.
+À configurer dans Cloudflare → Workers & Pages → bab-web → Settings :
+- Variables and Secrets : TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, RESEND_API_KEY, FROM_EMAIL, OWNER_EMAIL, WHATSAPP
+- Bindings : Workers AI → nom `AI` ; KV namespace (optionnel) → nom `LEADS`
+Puis redéployer (Deployments → Retry deployment).
