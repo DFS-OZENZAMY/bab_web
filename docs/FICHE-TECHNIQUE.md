@@ -31,7 +31,7 @@ Réglages du projet dans Cloudflare Pages :
 |---|---|
 | `index.html` | La page du site (contenu, styles et scripts dans un seul fichier) |
 | `functions/api/lead.js` | Fonction serveur qui reçoit les demandes de devis |
-| `fonts/` | Polices hébergées sur le site (Bricolage Grotesque, Readex Pro latin et arabe réduite) |
+| `fonts/` | Polices hébergées sur le site (Bricolage Grotesque, Readex Pro latin et arabe réduite, Instrument Serif italique réduite) |
 | `404.html` | Page affichée pour une adresse inexistante |
 | `robots.txt` | Autorisations des robots (Google, Bing, robots des IA) et lien vers le sitemap |
 | `sitemap.xml` | Liste des pages pour les moteurs de recherche |
@@ -50,14 +50,15 @@ Réglages du projet dans Cloudflare Pages :
 ## 3. Contenu de la page
 
 Sections, dans l'ordre :
-1. Navigation (logo, liens Offres / Méthode / Questions, bouton devis)
-2. En-tête : titre principal, phrase en arabe, arguments clés, démo interactive (riad, restaurant, cabinet)
-3. Tarifs (`#offres`) : formules et options
-4. Secteurs et villes desservies
-5. Méthode en 4 étapes (`#methode`)
-6. FAQ (`#faq`)
-7. Contact et formulaire de devis (`#contact`)
-8. Pied de page + bouton WhatsApp flottant
+1. Navigation (logo, liens Offres / Secteurs / Méthode / Questions, bouton devis)
+2. En-tête : titre principal, phrase en arabe, arguments clés, illustration « bab » (arche zellige, lanterne, palmier) avec la démo interactive (riad, restaurant, cabinet) dans l'arche
+3. Frise zellige
+4. Tarifs (`#offres`) : formules en cartes à sommet d'arche et options
+5. Secteurs (`#secteurs`) : 10 cartes avec icônes et villes desservies
+6. Méthode en 4 étapes illustrées (`#methode`)
+7. FAQ (`#faq`) avec illustration de lanterne
+8. Contact et formulaire de devis (`#contact`), médina de nuit en bas de section
+9. Pied de page + bouton WhatsApp flottant
 
 Tarifs affichés :
 
@@ -76,16 +77,24 @@ Important : si un prix change, il faut le modifier à **quatre endroits** : la s
 
 ## 4. Identité visuelle
 
+Refonte du 7 octobre 2026. Maquette de référence dans Figma : « Bab Web — Refonte 2026 » (https://www.figma.com/design/qvOyTFszSx0Zqbo9SJBI1y), avec la page complète en 1440 px et les composants (bouton, carte secteur, question FAQ, icônes).
+
+Fil conducteur : la porte (« bab »). L'arche marocaine revient partout : illustration principale, sommet des cartes de tarifs et de secteurs, médina de nuit dans la section contact.
+
 | Élément | Valeur |
 |---|---|
 | Bleu Majorelle | `#2438A6` (couleur principale) |
-| Bleu nuit | `#16226B` (formule mise en avant, section contact) |
-| Safran | `#F2B33D` (boutons, accents) |
+| Bleu nuit | `#16226B` / `#0E1550` (formule mise en avant, section contact) |
+| Safran | `#F2B33D` (boutons, accents, étoiles zellige) |
 | Vert menthe | `#1F5545` (section secteurs) |
-| Fond clair | `#F4F5FA` |
+| Terre cuite | `#B4532C` (phrase en arabe, prix, numéros d'étapes) |
+| Fond ivoire | `#F8F4EC`, sable `#EFE6D4`, fond FAQ `#F3ECDD` |
 | Texte | `#141A3A` / `#2B3150` |
 | Police des titres | Bricolage Grotesque |
 | Police du texte | Readex Pro (gère aussi l'arabe) |
+| Accent du titre principal | Instrument Serif italique (`fonts/instrument-italic.woff2`, réduite aux caractères latins) |
+
+Les illustrations sont en SVG directement dans `index.html` (aucune image à charger). Les animations (apparition de l'illustration, balancement de la lanterne) sont désactivées si l'appareil demande moins d'animations.
 
 Le site s'adapte automatiquement au mode sombre du téléphone ou de l'ordinateur. Tous les contrastes de texte ont été vérifiés (norme WCAG AA, minimum 4,5:1) en mode clair et en mode sombre.
 
