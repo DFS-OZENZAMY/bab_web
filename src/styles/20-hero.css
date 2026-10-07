@@ -1,0 +1,137 @@
+/* En-tête : titre, phrase en arabe, boutons, chiffres clés. */
+
+.hero {
+  padding: clamp(2.5rem,6vw,4.5rem) 0 clamp(3rem,6vw,5rem);
+  overflow: hidden;
+}
+
+.hero .wrap {
+  display: grid;
+  grid-template-columns: minmax(0,1.04fr) minmax(0,1fr);
+  gap: clamp(2rem,5vw,4rem);
+  align-items: center;
+}
+
+.where {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  background: color-mix(in srgb,var(--majorelle) 9%,transparent);
+  color: var(--accent);
+  font-weight: 500;
+  font-size: .85rem;
+  padding: .42rem .9rem;
+  border-radius: 999px;
+  margin: 0 0 1.5rem;
+}
+
+.where::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--safran);
+}
+
+.hero h1 {
+  font-size: clamp(2.4rem,4.9vw,3.85rem);
+  font-weight: 800;
+  text-wrap: pretty;
+}
+
+.hero h1 em {
+  white-space: nowrap;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+  font-size: 1.13em;
+  letter-spacing: -.01em;
+  line-height: .9;
+}
+
+.hero .ar {
+  font-weight: 500;
+  color: var(--terre);
+  font-size: 1.3rem;
+  margin: 1.3rem 0 0;
+  direction: rtl;
+  text-align: left;
+}
+
+.hero p.lead {
+  font-size: 1.18rem;
+  max-width: 44ch;
+  margin: 1.1rem 0 2.1rem;
+}
+
+.cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .8rem;
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(3,auto);
+  justify-content: start;
+  margin: 2.6rem 0 0;
+  padding: 0;
+  list-style: none;
+  color: var(--doux);
+  font-size: .88rem;
+  line-height: 1.35;
+}
+
+.facts li {
+  padding: 0 1.5rem;
+  border-left: 1px solid var(--ligne);
+  max-width: 12rem;
+}
+
+.facts li:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.facts strong {
+  display: block;
+  font-family: var(--display);
+  font-size: 1.45rem;
+  color: var(--encre);
+  font-weight: 700;
+  margin-bottom: .2rem;
+  letter-spacing: -.02em;
+}
+
+@media (max-width:960px) {
+  .hero .wrap {
+    grid-template-columns: 1fr;
+  }
+  .facts li {
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width:520px) {
+  .facts {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+  }
+  .facts li {
+    border: 0;
+    padding: 0;
+  }
+}
+
+@media (max-width:560px) {
+  .where {
+    font-size: .78rem;
+  }
+  .cta-row {
+    flex-direction: column;
+  }
+  .cta-row .btn {
+    width: 100%;
+  }
+}

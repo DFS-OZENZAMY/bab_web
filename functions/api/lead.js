@@ -4,23 +4,31 @@
 // 2. Te notifie sur Telegram et/ou par email
 // 3. Envoie au prospect un email personnalisé rédigé par l'IA (Workers AI)
 //
+// Les formules, prix, nom et adresse du site viennent de src/data/site.json (même source que la page).
+//
 // Variables à configurer dans Cloudflare (Settings → Variables and Secrets) :
 //   TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID   → notification instantanée sur ton téléphone
 //   RESEND_API_KEY                          → envoi des emails (resend.com, gratuit)
 //   FROM_EMAIL     ex. "Bab Web <contact@babweb.ma>" (adresse de ton domaine vérifié)
 //   OWNER_EMAIL    ton email : reçoit chaque lead + une copie de l'email envoyé au prospect
-//   WHATSAPP       ton numéro au format international, ex. 212612345678
+//   WHATSAPP       (optionnel) remplace le numéro de site.json dans le pied des emails
 // Liaisons (Settings → Bindings) :
 //   AI    → Workers AI (rédaction personnalisée, offre gratuite quotidienne)
 //   LEADS → KV namespace (optionnel : garde un historique des leads)
 
+import site from '../../src/data/site.json';
+
 const MODELE_IA = '@cf/meta/llama-3.3-70b-instruct-fp8-fast';
 
-const FORMULES = {
-  Essentiel: "1 500 DH : site d'une page adapté au mobile, bouton WhatsApp, formulaire, Google Maps, en ligne en 7 jours",
-  Business: '3 500 DH : jusqu\'à 6 pages en français et en arabe, référencement Google de base, fiche Google Business optimisée, email professionnel, 1re année d\'hébergement offerte',
-  Premium: '6 500 DH : design sur mesure en français, arabe et anglais, rédaction des textes, galerie et blog, 3 mois de maintenance offerts',
-};
+const prixTexte = montant => `${String(montant).replace(/\B(?=(\d{3})+(?!\d))/g, ' ')} ${site.offres.devise}`;
+
+// { Essentiel: "1 500 DH : site d'une page, adapté au mobile, …", Business: …, Premium: … }
+const FORMULES = Object.fromEntries(site.offres.formules.map(f => [
+  f.nom,
+  `${prixTexte(f.prix)} : ${f.points.map((p, i) => (i ? p[0].toLowerCase() + p.slice(1) : p)).join(', ')}`,
+]));
+const PRIX_MIN = prixTexte(Math.min(...site.offres.formules.map(f => f.prix)));
+const PRIX_MAX = prixTexte(Math.max(...site.offres.formules.map(f => f.prix)));
 
 export async function onRequestPost(context) {
   const { request, env } = context;
@@ -156,7 +164,7 @@ async function redigerEmail(lead, env) {
   const secours = emailModele(lead, env);
   if (!env.AI) return secours;
 
-  const systeme = `Tu es le freelance derrière Bab Web, qui crée des sites vitrines pour les entreprises au Maroc.
+  const systeme = `Tu es le freelance derrière ${site.site.nom}, qui crée des sites vitrines pour les entreprises au Maroc.
 Tu écris un email de réponse à un prospect qui vient de demander un devis sur ton site.
 
 Règles strictes :
@@ -164,12 +172,10 @@ Règles strictes :
 - Base-toi UNIQUEMENT sur ce que le prospect a écrit. N'invente aucun fait sur son entreprise (pas de chiffres, pas d'avis, pas de problème que tu ne connais pas). Si une information manque, reste général ou pose une question.
 - Explique concrètement, pour son type d'activité, ce qu'un site lui apporterait (être trouvé sur Google et Google Maps, rassurer les clients, recevoir des demandes sur WhatsApp, etc.).
 - Recommande UNE formule adaptée parmi celles-ci, avec son prix exact, sans en inventer d'autres :
-  Essentiel – ${FORMULES.Essentiel}
-  Business – ${FORMULES.Business}
-  Premium – ${FORMULES.Premium}
+${Object.entries(FORMULES).map(([nom, detail]) => `  ${nom} – ${detail}`).join('\n')}
 - Termine par une prochaine étape claire : un appel ou un message WhatsApp pour préparer le devis sous 24 heures.
 - Pas de promesse de résultat garanti (ex. « première place sur Google »).
-- Signe « L'équipe Bab Web ».
+- Signe « L'équipe ${site.site.nom} ».
 
 Réponds UNIQUEMENT avec un objet JSON valide, sans texte autour : {"objet": "...", "texte": "..."}`;
 
@@ -202,7 +208,7 @@ function emailModele(lead, env) {
   const prenom = lead.nom.split(' ')[0];
   const formule = FORMULES[lead.formule]
     ? `Vous vous intéressez à la formule ${lead.formule} (${FORMULES[lead.formule]}).`
-    : 'Nos formules vont de 1 500 DH pour un site d\'une page à 6 500 DH pour un site sur mesure en trois langues.';
+    : `Nos formules vont de ${PRIX_MIN} pour un site d'une page à ${PRIX_MAX} pour un site sur mesure en trois langues.`;
   const texte = `Bonjour ${prenom},
 
 Merci pour votre demande. Je l'ai bien reçue et je vous prépare une proposition sous 24 heures.
@@ -214,13 +220,13 @@ ${formule}
 Pour vous proposer la solution la plus adaptée, j'aimerais échanger quelques minutes avec vous sur votre activité et vos objectifs. Vous pouvez simplement répondre à cet email ou m'écrire sur WhatsApp.
 
 À très vite,
-L'équipe Bab Web`;
+L'équipe ${site.site.nom}`;
   return { objet: `${prenom}, votre demande de site internet est bien reçue`, texte: texte + piedEmail(env) };
 }
 
 function piedEmail(env) {
-  const wa = env.WHATSAPP ? `\nWhatsApp : https://wa.me/${env.WHATSAPP}` : '';
-  return `\n\n—\nBab Web · Création de sites vitrines au Maroc\nhttps://bab-web.pages.dev${wa}\nVous recevez cet email car vous avez demandé un devis sur notre site.`;
+  const numero = env.WHATSAPP || site.contact.whatsapp;
+  return `\n\n—\n${site.site.nom} · Création de sites vitrines au Maroc\n${site.site.url}\nWhatsApp : https://wa.me/${numero}\nVous recevez cet email car vous avez demandé un devis sur notre site.`;
 }
 
 // ---------- Outils ----------

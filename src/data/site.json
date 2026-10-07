@@ -1,0 +1,322 @@
+{
+  "_lisezmoi": "Source unique des textes, prix et coordonnées du site. Après une modification : npm run build pour vérifier, puis git push (Cloudflare reconstruit le site).",
+  "site": {
+    "nom": "Bab Web",
+    "url": "https://bab-web.pages.dev",
+    "langue": "fr",
+    "locale": "fr_MA",
+    "statut": "Auto-entrepreneur",
+    "couleurTheme": "#2438A6",
+    "couleurFond": "#F8F4EC",
+    "derniereMiseAJour": "2026-10-07"
+  },
+  "seo": {
+    "titre": "Création de site vitrine au Maroc dès {prix:essentiel} | Bab Web",
+    "description": "Création de sites vitrines professionnels au Maroc, en français et en arabe : restaurants, riads, cabinets, commerces. Mise en ligne en 7 jours, dès {prix:essentiel}.",
+    "ogTitre": "Création de site vitrine au Maroc dès {prix:essentiel}",
+    "ogDescription": "Sites rapides et bilingues français/arabe pour restaurants, riads, cabinets et commerces. Mise en ligne en 7 jours.",
+    "ogImageAlt": "Bab Web, création de sites vitrines au Maroc",
+    "resume": "Création de sites vitrines professionnels et bilingues pour les entreprises au Maroc.",
+    "competences": [
+      "Création de site web",
+      "Site vitrine",
+      "Référencement local",
+      "Google Business Profile"
+    ],
+    "paiementsAcceptes": "Virement bancaire, Espèces"
+  },
+  "contact": {
+    "whatsapp": "33758984318",
+    "whatsappAffiche": "+33 7 58 98 43 18",
+    "email": "contact@babweb.ma"
+  },
+  "villes": [
+    "Casablanca",
+    "Rabat",
+    "Marrakech",
+    "Tanger",
+    "Fès",
+    "Agadir"
+  ],
+  "hero": {
+    "lieu": "Casablanca, Marrakech, Rabat et tout le Maroc",
+    "titre": "Des sites vitrines au Maroc qui ouvrent *grand la porte* à vos clients.",
+    "arabe": "موقع إلكتروني احترافي لنشاطك، بالعربية والفرنسية",
+    "texte": "Je crée des sites rapides, élégants et bilingues pour les riads, restaurants, cabinets et commerces. Vos clients vous trouvent sur Google et vous écrivent directement sur WhatsApp.",
+    "boutonPrincipal": "Demander un devis gratuit",
+    "boutonSecondaire": "Voir les tarifs",
+    "chiffres": [
+      {
+        "valeur": "7 à 15 jours",
+        "legende": "de la commande à la mise en ligne"
+      },
+      {
+        "valeur": "FR, AR, EN",
+        "legende": "versions linguistiques"
+      },
+      {
+        "valeur": "dès {prix:essentiel}",
+        "legende": "sans frais cachés"
+      }
+    ]
+  },
+  "demos": [
+    {
+      "id": "riad",
+      "onglet": "Riad",
+      "fond": "linear-gradient(160deg,#C8643B,#7A2E16)",
+      "lieu": "Marrakech, Médina",
+      "nom": "Riad Dar Lina",
+      "message": "« Une chambre pour samedi ? »",
+      "lignes": [
+        [
+          "Chambre double",
+          "650 DH"
+        ],
+        [
+          "Suite patio",
+          "980 DH"
+        ],
+        [
+          "Petit-déjeuner",
+          "inclus"
+        ]
+      ],
+      "bouton": "Réserver sur WhatsApp"
+    },
+    {
+      "id": "resto",
+      "onglet": "Restaurant",
+      "fond": "linear-gradient(160deg,#2F6B57,#143A2D)",
+      "lieu": "Casablanca, Maârif",
+      "nom": "Dar Tajine",
+      "message": "« Une table pour 4 ce soir ? »",
+      "lignes": [
+        [
+          "Tajine de poulet",
+          "75 DH"
+        ],
+        [
+          "Couscous royal",
+          "110 DH"
+        ],
+        [
+          "Thé à la menthe",
+          "15 DH"
+        ]
+      ],
+      "bouton": "Commander sur WhatsApp"
+    },
+    {
+      "id": "cabinet",
+      "onglet": "Cabinet",
+      "fond": "linear-gradient(160deg,#2438A6,#16226B)",
+      "lieu": "Rabat, Agdal",
+      "nom": "Cabinet Dr Benali",
+      "message": "« Un rendez-vous jeudi ? »",
+      "lignes": [
+        [
+          "Consultation",
+          "Lun – Sam"
+        ],
+        [
+          "Détartrage",
+          "sur RDV"
+        ],
+        [
+          "Urgences",
+          "7j/7"
+        ]
+      ],
+      "bouton": "Prendre rendez-vous"
+    }
+  ],
+  "offres": {
+    "titre": "Trois formules claires pour votre site vitrine.",
+    "intro": "Le nom de domaine reste à votre nom. Le site est hébergé sur une infrastructure rapide et sécurisée, avec certificat SSL inclus.",
+    "devise": "DH",
+    "deviseIso": "MAD",
+    "formules": [
+      {
+        "id": "essentiel",
+        "nom": "Essentiel",
+        "prix": 1500,
+        "accroche": "Pour être présent en ligne rapidement",
+        "resume": "Site d'une page, adapté au mobile, avec WhatsApp, formulaire et Google Maps.",
+        "points": [
+          "Site d'une page, adapté au mobile",
+          "Bouton WhatsApp et appel direct",
+          "Formulaire de contact",
+          "Carte Google Maps intégrée",
+          "Mise en ligne en 7 jours"
+        ]
+      },
+      {
+        "id": "business",
+        "nom": "Business",
+        "prix": 3500,
+        "accroche": "Pour attirer de nouveaux clients",
+        "vedette": "Le plus demandé",
+        "resume": "Jusqu'à 6 pages en français et en arabe, référencement de base et fiche Google Business.",
+        "points": [
+          "Jusqu'à 6 pages",
+          "Version française et arabe",
+          "Référencement Google de base",
+          "Fiche Google Business optimisée",
+          "Adresse email professionnelle",
+          "Première année d'hébergement offerte"
+        ]
+      },
+      {
+        "id": "premium",
+        "nom": "Premium",
+        "prix": 6500,
+        "accroche": "Pour une image haut de gamme",
+        "resume": "Design sur mesure en trois langues, rédaction, galerie et blog.",
+        "points": [
+          "Pages illimitées, design sur mesure",
+          "Français, arabe et anglais",
+          "Rédaction des textes incluse",
+          "Galerie photo et blog",
+          "3 mois de maintenance offerts"
+        ]
+      }
+    ],
+    "options": [
+      {
+        "icone": "domaine",
+        "nom": "Hébergement et domaine",
+        "detail": "800 DH par an, email et sécurité inclus"
+      },
+      {
+        "icone": "maintenance",
+        "nom": "Maintenance",
+        "detail": "250 DH par mois, modifications illimitées"
+      },
+      {
+        "icone": "logo",
+        "nom": "Création de logo",
+        "detail": "à partir de 800 DH"
+      }
+    ]
+  },
+  "secteurs": {
+    "titre": "Des sites internet pensés pour votre métier.",
+    "intro": "Chaque secteur a ses besoins : réservations pour un riad, menu pour un restaurant, prise de rendez-vous pour un cabinet. Je travaille avec des entreprises partout au Maroc, à distance ou en rendez-vous : {villes} et ailleurs.",
+    "liste": [
+      {
+        "icone": "riad",
+        "nom": "Riads et maisons d'hôtes"
+      },
+      {
+        "icone": "resto",
+        "nom": "Restaurants et cafés"
+      },
+      {
+        "icone": "sante",
+        "nom": "Cabinets médicaux et dentaires"
+      },
+      {
+        "icone": "droit",
+        "nom": "Avocats et notaires"
+      },
+      {
+        "icone": "beaute",
+        "nom": "Salons de beauté et spas"
+      },
+      {
+        "icone": "auto",
+        "nom": "Auto-écoles"
+      },
+      {
+        "icone": "ecole",
+        "nom": "Écoles et centres de formation"
+      },
+      {
+        "icone": "artisan",
+        "nom": "Coopératives et artisans"
+      },
+      {
+        "icone": "immo",
+        "nom": "Agences immobilières"
+      },
+      {
+        "icone": "voyage",
+        "nom": "Agences de voyage"
+      }
+    ]
+  },
+  "methode": {
+    "titre": "Comment se déroule votre projet.",
+    "etapes": [
+      {
+        "illustration": "echange",
+        "titre": "On échange",
+        "texte": "Un appel ou un message WhatsApp pour comprendre votre activité.",
+        "badge": "Devis sous 24 h"
+      },
+      {
+        "illustration": "maquette",
+        "titre": "Je conçois",
+        "texte": "Vous recevez une maquette à valider, après un acompte de 50 %."
+      },
+      {
+        "illustration": "reglages",
+        "titre": "Vous ajustez",
+        "texte": "Deux séries de modifications incluses pour que tout vous ressemble."
+      },
+      {
+        "illustration": "porte",
+        "titre": "Mise en ligne",
+        "texte": "Votre site est publié sur votre nom de domaine. Vous réglez le solde."
+      }
+    ]
+  },
+  "faq": {
+    "titre": "Vos questions.",
+    "intro": "Une autre question ? Écrivez-moi sur WhatsApp, je réponds dans la journée.",
+    "questions": [
+      {
+        "question": "Combien coûte un site vitrine au Maroc ?",
+        "reponse": "Chez Bab Web, un site vitrine coûte {prix:essentiel} pour une page, {prix:business} pour un site bilingue jusqu'à 6 pages, et {prix:premium} pour un site sur mesure en trois langues."
+      },
+      {
+        "question": "Le site m'appartient-il ?",
+        "reponse": "Oui. Le nom de domaine est enregistré à votre nom et vous recevez tous les accès à la livraison."
+      },
+      {
+        "question": "Que dois-je fournir ?",
+        "reponse": "Votre logo si vous en avez un, quelques photos, vos horaires et vos coordonnées. Une liste simple vous est envoyée au début du projet."
+      },
+      {
+        "question": "Puis-je modifier le site moi-même ?",
+        "reponse": "Oui, un espace de modification simple peut être ajouté. Sinon, la formule maintenance couvre toutes vos mises à jour."
+      },
+      {
+        "question": "Comment se passe le paiement ?",
+        "reponse": "50 % au démarrage et 50 % avant la mise en ligne, par virement bancaire ou en espèces. Une facture est remise à chaque paiement."
+      },
+      {
+        "question": "Mon site sera-t-il visible sur Google ?",
+        "reponse": "Oui. Les formules Business et Premium incluent le référencement de base et l'optimisation de votre fiche Google Business, essentielle pour apparaître sur Google Maps."
+      }
+    ]
+  },
+  "contactSection": {
+    "titre": "Parlons de votre site.",
+    "intro": "Décrivez votre activité en quelques mots. Je vous réponds avec une proposition et un prix sous 24 heures.",
+    "formulaireTitre": "Demande de devis gratuite",
+    "consentement": "J'accepte que Bab Web utilise ces informations pour me recontacter au sujet de ma demande (loi 09-08).",
+    "bouton": "Envoyer ma demande"
+  },
+  "llms": {
+    "presentation": "Bab Web est un service freelance de création de sites vitrines pour les entreprises au Maroc : restaurants, riads et maisons d'hôtes, cabinets médicaux et dentaires, avocats, salons de beauté, auto-écoles, écoles, coopératives, agences immobilières et agences de voyage. Sites rapides, adaptés au mobile, en français, en arabe et en anglais, avec contact WhatsApp. Statut : auto-entrepreneur au Maroc.",
+    "fonctionnement": [
+      "Zone : tout le Maroc ({villes} et autres villes), à distance ou en rendez-vous.",
+      "Délai : 7 à 15 jours de la commande à la mise en ligne.",
+      "Paiement : 50 % au démarrage, 50 % avant la mise en ligne, par virement ou en espèces, avec facture.",
+      "Le nom de domaine est enregistré au nom du client, qui reçoit tous les accès.",
+      "Devis gratuit sous 24 heures."
+    ]
+  }
+}

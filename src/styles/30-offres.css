@@ -1,0 +1,180 @@
+/* Section tarifs : cartes en arche et options. */
+
+.packs {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 1.5rem;
+  margin-top: 3.5rem;
+  align-items: end;
+}
+
+.pack {
+  background: var(--carte);
+  border: 1px solid var(--ligne);
+  border-radius: 200px 200px 28px 28px;
+  padding: 3.4rem 2.1rem 2.1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.pack .orn {
+  width: 56px;
+  height: 56px;
+  margin-bottom: 1.1rem;
+}
+
+.pack h3 {
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.pack .for {
+  margin: .3rem 0 1.4rem;
+  font-size: .95rem;
+  color: var(--doux);
+}
+
+.price {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 3.2rem;
+  color: var(--encre);
+  line-height: 1;
+  letter-spacing: -.04em;
+}
+
+.price span {
+  font-family: var(--body);
+  font-weight: 500;
+  font-size: 1.1rem;
+  color: var(--terre);
+  letter-spacing: 0;
+  margin-left: .3rem;
+}
+
+.pack ul {
+  list-style: none;
+  padding: 1.5rem 0 0;
+  margin: 1.5rem 0 1.9rem;
+  display: grid;
+  gap: .75rem;
+  font-size: .97rem;
+  text-align: left;
+  width: 100%;
+  border-top: 1px solid var(--ligne);
+}
+
+.pack li {
+  display: flex;
+  gap: .75rem;
+  align-items: flex-start;
+}
+
+.pack li svg {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  margin-top: .22rem;
+}
+
+.pack .btn {
+  width: 100%;
+  margin-top: auto;
+}
+
+.pack:not(.featured) .btn {
+  background: transparent;
+  color: var(--encre);
+  box-shadow: inset 0 0 0 1.5px var(--ligne);
+}
+
+.pack:not(.featured) .btn:hover {
+  box-shadow: inset 0 0 0 1.5px var(--encre);
+}
+
+.pack.featured {
+  background: linear-gradient(180deg,#2438A6,#16226B);
+  border-color: transparent;
+  color: #E4E7FA;
+  padding-top: 4.2rem;
+  padding-bottom: 2.6rem;
+  box-shadow: 0 40px 70px -35px rgba(22,34,107,.7);
+}
+
+.pack.featured h3,.pack.featured .price {
+  color: #fff;
+}
+
+.pack.featured .for {
+  color: #C9CFF2;
+}
+
+.pack.featured .price span {
+  color: var(--safran);
+}
+
+.pack.featured ul {
+  border-color: rgba(255,255,255,.15);
+}
+
+.pack .tag {
+  display: inline-block;
+  background: var(--safran);
+  color: #1C1606;
+  font-size: .78rem;
+  font-weight: 500;
+  padding: .22rem .75rem;
+  border-radius: 999px;
+  margin-bottom: .8rem;
+}
+
+.extras {
+  margin-top: 2.5rem;
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 1.5rem;
+}
+
+.extra {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  background: color-mix(in srgb,var(--carte) 65%,transparent);
+  border: 1px solid var(--ligne);
+  border-radius: 22px;
+  padding: 1.1rem 1.25rem;
+}
+
+.extra svg {
+  width: 46px;
+  height: 46px;
+  flex: none;
+}
+
+.extra b {
+  font-family: var(--display);
+  color: var(--encre);
+  font-size: 1.08rem;
+  display: block;
+  font-weight: 700;
+}
+
+.extra span {
+  color: var(--doux);
+  font-size: .92rem;
+}
+
+@media (max-width:960px) {
+  .packs,.extras {
+    grid-template-columns: 1fr;
+  }
+  .packs {
+    max-width: 440px;
+    margin-inline: auto;
+  }
+  .pack.featured {
+    order: -1;
+  }
+}

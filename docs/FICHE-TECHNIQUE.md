@@ -1,7 +1,7 @@
 # Fiche technique – Site Bab Web
 
 Document de référence du site : ce qu'il contient, comment il fonctionne, comment le configurer et le faire évoluer.
-Dernière mise à jour : 7 octobre 2026.
+Dernière mise à jour : 7 octobre 2026 (refactoring : source unique `site.json` et build automatique).
 
 ---
 
@@ -12,38 +12,75 @@ Dernière mise à jour : 7 octobre 2026.
 | Site | https://bab-web.pages.dev/ |
 | Dépôt GitHub | https://github.com/DFS-OZENZAMY/bab_web (branche `main`) |
 | Hébergement | Cloudflare Pages (offre gratuite), déploiement automatique à chaque modification sur `main` |
-| Type de site | Site statique d'une page + une fonction serveur (`/api/lead`) |
+| Type de site | Site statique d'une page, généré à partir de `src/` par un petit script Node.js sans dépendance, + une fonction serveur (`/api/lead`) |
 | Langues | Français (contenu principal), une phrase en arabe |
 | Coût mensuel actuel | 0 DH (hors futur nom de domaine) |
 
-Fonctionnement du déploiement : une modification est envoyée sur GitHub → Cloudflare la détecte → le site est mis à jour en une minute environ. Il n'y a aucune étape de compilation.
+Fonctionnement du déploiement : une modification est envoyée sur GitHub → Cloudflare lance `npm run build`, qui vérifie les données et génère le site dans `dist/` → le site est mis à jour en une minute environ. Si une vérification échoue, le déploiement s'arrête et la version précédente reste en ligne.
 
-Réglages du projet dans Cloudflare Pages :
+Réglages du projet dans Cloudflare Pages (Workers & Pages → bab-web → Settings → Build) :
 - Framework preset : None
-- Build command : (vide)
-- Build output directory : `/`
+- Build command : `npm run build`
+- Build output directory : `dist`
 
 ---
 
 ## 2. Structure des fichiers
 
-| Fichier | Rôle |
+Règle d'or : **chaque information n'existe qu'à un seul endroit**.
+
+| Emplacement | Rôle |
 |---|---|
-| `index.html` | La page du site (contenu, styles et scripts dans un seul fichier) |
-| `functions/api/lead.js` | Fonction serveur qui reçoit les demandes de devis |
-| `fonts/` | Polices hébergées sur le site (Bricolage Grotesque, Readex Pro latin et arabe réduite, Instrument Serif italique réduite) |
-| `404.html` | Page affichée pour une adresse inexistante |
-| `robots.txt` | Autorisations des robots (Google, Bing, robots des IA) et lien vers le sitemap |
-| `sitemap.xml` | Liste des pages pour les moteurs de recherche |
-| `llms.txt` | Résumé de l'activité destiné aux assistants IA |
-| `_headers` | En-têtes HTTP Cloudflare (sécurité, cache, confidentialité de la documentation) |
-| `_redirects` | Empêche l'accès public à la documentation et au code de la fonction |
-| `site.webmanifest` | Nom, couleurs et icônes quand le site est ajouté à l'écran d'accueil |
-| `favicon.svg`, `favicon-32.png`, `apple-touch-icon.png`, `icon-192.png`, `icon-512.png` | Icônes |
-| `og-image.png` | Image d'aperçu lors d'un partage (WhatsApp, Facebook, LinkedIn) |
-| `google8b12182a3785c621.html` | Validation de Google Search Console. Ne pas supprimer |
-| `README.md` | Résumé rapide du projet |
-| `docs/FICHE-TECHNIQUE.md` | Ce document |
+| `src/data/site.json` | Tous les textes, prix, coordonnées, secteurs, étapes, questions, démos. Source unique pour la page, les données Google, `llms.txt` et les emails |
+| `src/styles/` | CSS découpé par rôle, dans l'ordre de chargement : `01-polices`, `02-variables` (couleurs et thème sombre), `03-base`, `10-boutons`, `11-navigation`, `20-hero`, `21-demo`, `22-frise`, `30-offres` à `34-contact`, `40-pied-de-page` |
+| `src/sections/` | Le HTML de chaque section (`hero.js`, `offres.js`, etc.) |
+| `src/illustrations/` | Les dessins SVG : arche, frise, lanterne, médina, icônes des secteurs et des étapes |
+| `src/scripts/` | JavaScript du navigateur : `demo.js` (onglets Riad, Restaurant, Cabinet), `devis.js` (formulaire), `main.js` (démarrage) |
+| `src/pages/` | Assemblage : `accueil.js`, `introuvable.js` (404), `tete.js` (balises `<head>`) |
+| `src/seo/` | Données structurées Google, `llms.txt`, `robots.txt`, `sitemap.xml`, `site.webmanifest` |
+| `src/lib/` | Outils partagés : format des prix, échappement HTML, liens WhatsApp |
+| `public/` | Copié tel quel : polices, icônes, `og-image.png`, `_headers`, validation Google Search Console (`google8b12182a3785c621.html`, ne pas supprimer) |
+| `functions/api/lead.js` | Fonction serveur du formulaire. Lit aussi `site.json` |
+| `scripts/build.mjs` | Génère `dist/` (CSS et JS intégrés dans la page, une seule requête) |
+| `scripts/verifications.mjs` | Contrôles automatiques à chaque build |
+| `scripts/dev.mjs` | Serveur local avec reconstruction automatique |
+| `dist/` | Site généré, publié par Cloudflare. Jamais modifié à la main, ignoré par git |
+
+### Vérifications automatiques
+
+Le build refuse de publier si :
+- une rubrique manque dans `site.json`, un prix n'est pas un nombre entier, deux formules ont le même id ou plusieurs sont « vedette » ;
+- l'adresse du site, le numéro WhatsApp, l'email ou la date de mise à jour sont mal formés ;
+- une icône ou illustration demandée n'existe pas ;
+- la page contient un repère non remplacé (`{prix:…}`), `undefined` ou `NaN` ;
+- la page n'a pas exactement un titre `<h1>`, les données Google sont invalides, ou un lien du menu pointe vers une section absente ;
+- la page dépasse 120 Ko.
+
+### Repères utilisables dans les textes de `site.json`
+
+| Repère | Remplacé par |
+|---|---|
+| `{prix:essentiel}`, `{prix:business}`, `{prix:premium}` | Le prix de la formule, ex. « 1 500 DH » |
+| `{villes}` | La liste `villes`, ex. « Casablanca, Rabat, Marrakech… » |
+| `*mots*` | Mots en italique accentué (utilisé dans le titre principal) |
+
+---
+
+## Modifications courantes
+
+**Changer un prix** : modifier `prix` de la formule dans `site.json` (nombre sans espace, ex. `1800`). Tout le reste suit, y compris les emails.
+
+**Changer le numéro WhatsApp ou l'email** : rubrique `contact` de `site.json`.
+
+**Ajouter une question à la FAQ** : ajouter `{ "question": "…", "reponse": "…" }` dans `faq.questions`. Elle apparaît aussi dans les données Google.
+
+**Ajouter un secteur** : ajouter `{ "icone": "…", "nom": "…" }` dans `secteurs.liste`, avec une icône existante (`riad`, `resto`, `sante`, `droit`, `beaute`, `auto`, `ecole`, `artisan`, `immo`, `voyage`). Pour une nouvelle icône, ajouter son dessin dans `src/illustrations/secteurs.js`.
+
+**Changer une couleur** : `src/styles/02-variables.css` (penser aussi aux valeurs du mode sombre juste en dessous).
+
+**Passer sur un nom de domaine** : modifier `site.url` dans `site.json` (ex. `https://babweb.ma`). Balises, données Google, `robots.txt`, `sitemap.xml`, `llms.txt` et emails sont mis à jour automatiquement.
+
+**Après une modification de contenu** : mettre à jour `site.derniereMiseAJour` (utilisé par le sitemap).
 
 ---
 
@@ -71,7 +108,7 @@ Tarifs affichés :
 | Maintenance | 250 DH / mois |
 | Logo | à partir de 800 DH |
 
-Important : si un prix change, il faut le modifier à **quatre endroits** : la section tarifs de `index.html`, le bloc de données structurées (`application/ld+json`) de `index.html`, `llms.txt`, et la constante `FORMULES` de `functions/api/lead.js` (utilisée par l'IA dans les emails).
+Les prix se modifient uniquement dans `src/data/site.json` (voir « Modifications courantes »).
 
 ---
 
@@ -92,9 +129,9 @@ Fil conducteur : la porte (« bab »). L'arche marocaine revient partout : illus
 | Texte | `#141A3A` / `#2B3150` |
 | Police des titres | Bricolage Grotesque |
 | Police du texte | Readex Pro (gère aussi l'arabe) |
-| Accent du titre principal | Instrument Serif italique (`fonts/instrument-italic.woff2`, réduite aux caractères latins) |
+| Accent du titre principal | Instrument Serif italique (`public/fonts/instrument-italic.woff2`, réduite aux caractères latins) |
 
-Les illustrations sont en SVG directement dans `index.html` (aucune image à charger). Les animations (apparition de l'illustration, balancement de la lanterne) sont désactivées si l'appareil demande moins d'animations.
+Les illustrations sont des SVG générés par `src/illustrations/` et intégrés dans la page (aucune image à charger). Les animations (apparition de l'illustration, balancement de la lanterne) sont désactivées si l'appareil demande moins d'animations.
 
 Le site s'adapte automatiquement au mode sombre du téléphone ou de l'ordinateur. Tous les contrastes de texte ont été vérifiés (norme WCAG AA, minimum 4,5:1) en mode clair et en mode sombre.
 
@@ -119,7 +156,7 @@ Google Search Console :
 À faire :
 - Ajouter le site dans Bing Webmaster Tools (import possible depuis Search Console)
 - Créer la fiche Google Business Profile
-- Acheter un nom de domaine, puis remplacer `https://bab-web.pages.dev` dans `index.html` (balises et données structurées), `robots.txt`, `sitemap.xml`, `llms.txt` et `functions/api/lead.js`
+- Acheter un nom de domaine, puis modifier `site.url` dans `src/data/site.json`
 - Ajouter le nouveau domaine dans Search Console (méthode DNS possible à ce moment-là)
 
 ---
@@ -142,7 +179,7 @@ Point de vigilance : lors de l'ajout d'un domaine personnalisé dans Cloudflare,
 - Aucune image lourde dans la page, icônes en SVG
 - Cache d'un an pour les polices et les images (`_headers`)
 
-Attention : si une nouvelle phrase en arabe est ajoutée, la police arabe réduite ne contiendra pas forcément les lettres nécessaires. Il faudra régénérer `fonts/readex-arabe.woff2` avec tout le texte arabe de la page (outil `pyftsubset`), ou remplacer ce fichier par la version complète de Readex Pro arabe.
+Attention : si une nouvelle phrase en arabe est ajoutée, la police arabe réduite ne contiendra pas forcément les lettres nécessaires. Il faudra régénérer `public/fonts/readex-arabe.woff2` avec tout le texte arabe de la page (outil `pyftsubset`), ou remplacer ce fichier par la version complète de Readex Pro arabe.
 
 Objectif PageSpeed Insights : 90 ou plus dans les quatre catégories, en mobile.
 
@@ -188,7 +225,7 @@ Workers & Pages → bab-web → Settings.
 | `RESEND_API_KEY` | `re_…` | Clé API Resend |
 | `FROM_EMAIL` | `Bab Web <onboarding@resend.dev>` puis `Bab Web <contact@babweb.ma>` | Expéditeur des emails |
 | `OWNER_EMAIL` | `ton.email@gmail.com` | Reçoit les leads, les copies et les réponses |
-| `WHATSAPP` | `33758984318` | Ton numéro, affiché dans les emails |
+| `WHATSAPP` | `33758984318` | Optionnel : par défaut, le numéro de `site.json` est utilisé dans les emails |
 
 **Bindings** :
 
@@ -211,6 +248,11 @@ Après chaque changement : Deployments → Retry deployment.
 
 | Information | Où |
 |---|---|
+| Numéro WhatsApp : **+33 7 58 98 43 18** | `src/data/site.json` → `contact.whatsapp` (chiffres seuls) et `contact.whatsappAffiche` (format lisible) |
+| Email (`contact@babweb.ma`) | `src/data/site.json` → `contact.email` |
+| Nom de la marque, adresse du site | `src/data/site.json` → `site.nom`, `site.url`. Seuls les fichiers image (`og-image.png`, icônes) sont à refaire à la main |
+
+---|---|
 | Numéro WhatsApp : **+33 7 58 98 43 18** (configuré le 07/10/2026) | `index.html` : lien de contact, bouton flottant, constante `WHATSAPP` du script (`33758984318`) ; données structurées (`+33758984318`) ; `llms.txt` ; variable Cloudflare `WHATSAPP` |
 | Email (`contact@babweb.ma`) | `index.html` (contact et données structurées) ; `llms.txt` |
 | Nom de la marque | `index.html`, `llms.txt`, `site.webmanifest`, `og-image.png`, `functions/api/lead.js` |
@@ -223,7 +265,7 @@ Après chaque changement : Deployments → Retry deployment.
 - Les tokens GitHub et clés Cloudflare partagés pendant la création du site doivent être supprimés et recréés si besoin.
 - Pour donner un accès temporaire au dépôt : token GitHub « fine-grained », limité au dépôt `bab_web`, permission Contents en lecture/écriture, expiration courte.
 - Formulaire : case de consentement conforme à la loi 09-08. Prévoir une politique de confidentialité et, selon le traitement, une déclaration auprès de la CNDP.
-- La documentation (`docs/`, `README.md`) et le code de `functions/` ne sont pas accessibles publiquement (`_redirects`) et ne sont pas indexés (`_headers`).
+- Seul le dossier généré `dist/` est publié : la documentation, les sources (`src/`) et le code de `functions/` ne sont pas accessibles depuis le site.
 
 ---
 

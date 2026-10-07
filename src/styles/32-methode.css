@@ -1,0 +1,115 @@
+/* Section méthode en 4 étapes. */
+
+.steps {
+  list-style: none;
+  padding: 0;
+  margin: 3.5rem 0 0;
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 1.5rem;
+}
+
+.steps li {
+  background: var(--carte);
+  border: 1px solid var(--ligne);
+  border-radius: 26px;
+  padding: 1.6rem 1.6rem 1.9rem;
+}
+
+.steps .head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.2rem;
+}
+
+.steps .head svg {
+  width: 120px;
+  height: 96px;
+}
+
+.steps .num {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 2.6rem;
+  line-height: 1;
+  color: var(--terre);
+}
+
+.steps h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: .45rem;
+}
+
+.steps p {
+  margin: 0;
+  color: var(--doux);
+  font-size: .97rem;
+}
+
+.steps .badge {
+  display: inline-block;
+  margin-top: .9rem;
+  background: color-mix(in srgb,var(--majorelle) 9%,transparent);
+  color: var(--accent);
+  font-weight: 500;
+  font-size: .82rem;
+  padding: .25rem .75rem;
+  border-radius: 999px;
+}
+
+@media (max-width:960px) {
+  .steps {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width:560px) {
+  .steps {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width:560px) {
+  .steps {
+    gap: .9rem;
+  }
+  .steps li {
+    position: relative;
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    column-gap: 1rem;
+    align-items: start;
+    padding: 1.15rem 1.15rem 1.2rem;
+    border-radius: 22px;
+  }
+  .steps .head {
+    display: contents;
+  }
+  .steps .head svg {
+    grid-row: 1/span 3;
+    width: 90px;
+    height: 72px;
+  }
+  .steps .num {
+    position: absolute;
+    top: 1rem;
+    right: 1.15rem;
+    font-size: 1.9rem;
+  }
+  .steps h3 {
+    font-size: 1.15rem;
+    padding-right: 2.6rem;
+    margin-top: .15rem;
+  }
+  .steps p {
+    font-size: .9rem;
+    grid-column: 2;
+  }
+  .steps .badge {
+    grid-column: 2;
+    justify-self: start;
+    margin-top: .6rem;
+  }
+}
