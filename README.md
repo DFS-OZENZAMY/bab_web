@@ -5,7 +5,7 @@
 Site statique (un seul fichier `index.html`), prêt pour Cloudflare Pages.
 
 ## À personnaliser avant la mise en ligne
-1. Remplacer `212600000000` par ton numéro WhatsApp (format international, sans + ni espaces) – 3 endroits.
+1. Numéro WhatsApp : +33 7 58 98 43 18 (déjà configuré).
 2. Remplacer `contact@babweb.ma` par ton email.
 3. Créer une clé gratuite sur https://web3forms.com et remplacer `VOTRE_CLE_WEB3FORMS`.
    (Sans clé, le formulaire ouvre WhatsApp avec le message prérempli.)

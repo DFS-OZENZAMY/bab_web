@@ -179,7 +179,7 @@ Workers & Pages → bab-web → Settings.
 | `RESEND_API_KEY` | `re_…` | Clé API Resend |
 | `FROM_EMAIL` | `Bab Web <onboarding@resend.dev>` puis `Bab Web <contact@babweb.ma>` | Expéditeur des emails |
 | `OWNER_EMAIL` | `ton.email@gmail.com` | Reçoit les leads, les copies et les réponses |
-| `WHATSAPP` | `212612345678` | Ton numéro, affiché dans les emails |
+| `WHATSAPP` | `33758984318` | Ton numéro, affiché dans les emails |
 
 **Bindings** :
 
@@ -202,7 +202,7 @@ Après chaque changement : Deployments → Retry deployment.
 
 | Information | Où |
 |---|---|
-| Numéro WhatsApp (`212600000000`) | `index.html` : lien de contact, bouton flottant, constante `WHATSAPP` du script ; données structurées (`+212600000000`) ; `llms.txt` |
+| Numéro WhatsApp : **+33 7 58 98 43 18** (configuré le 07/10/2026) | `index.html` : lien de contact, bouton flottant, constante `WHATSAPP` du script (`33758984318`) ; données structurées (`+33758984318`) ; `llms.txt` ; variable Cloudflare `WHATSAPP` |
 | Email (`contact@babweb.ma`) | `index.html` (contact et données structurées) ; `llms.txt` |
 | ICE | Pied de page de `index.html` |
 | Nom de la marque | `index.html`, `llms.txt`, `site.webmanifest`, `og-image.png`, `functions/api/lead.js` |
@@ -231,12 +231,13 @@ Après chaque changement : Deployments → Retry deployment.
 | 07/10/2026 | Validation Google Search Console |
 | 07/10/2026 | Système de leads : Telegram, email, email personnalisé par IA |
 | 07/10/2026 | Fiche technique |
+| 07/10/2026 | Numéro WhatsApp réel : +33 7 58 98 43 18 |
 
 ---
 
 ## 12. Prochaines étapes conseillées
 
-1. Remplacer les informations de démonstration (WhatsApp, email, ICE)
+1. Remplacer les informations de démonstration restantes (email, ICE)
 2. Configurer Telegram et Resend, tester un envoi du formulaire
 3. Acheter le nom de domaine et le relier à Cloudflare Pages
 4. Vérifier le domaine dans Resend pour activer les emails aux prospects
