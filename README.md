@@ -9,7 +9,6 @@ Site statique (un seul fichier `index.html`), prêt pour Cloudflare Pages.
 2. Remplacer `contact@babweb.ma` par ton email.
 3. Créer une clé gratuite sur https://web3forms.com et remplacer `VOTRE_CLE_WEB3FORMS`.
    (Sans clé, le formulaire ouvre WhatsApp avec le message prérempli.)
-4. Compléter ton ICE dans le pied de page.
 
 ## Déploiement
 GitHub → Cloudflare Pages → Connect to Git → choisir le dépôt

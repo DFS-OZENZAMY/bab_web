@@ -204,7 +204,6 @@ Après chaque changement : Deployments → Retry deployment.
 |---|---|
 | Numéro WhatsApp : **+33 7 58 98 43 18** (configuré le 07/10/2026) | `index.html` : lien de contact, bouton flottant, constante `WHATSAPP` du script (`33758984318`) ; données structurées (`+33758984318`) ; `llms.txt` ; variable Cloudflare `WHATSAPP` |
 | Email (`contact@babweb.ma`) | `index.html` (contact et données structurées) ; `llms.txt` |
-| ICE | Pied de page de `index.html` |
 | Nom de la marque | `index.html`, `llms.txt`, `site.webmanifest`, `og-image.png`, `functions/api/lead.js` |
 
 ---
@@ -232,12 +231,13 @@ Après chaque changement : Deployments → Retry deployment.
 | 07/10/2026 | Système de leads : Telegram, email, email personnalisé par IA |
 | 07/10/2026 | Fiche technique |
 | 07/10/2026 | Numéro WhatsApp réel : +33 7 58 98 43 18 |
+| 07/10/2026 | Suppression de la mention ICE du pied de page |
 
 ---
 
 ## 12. Prochaines étapes conseillées
 
-1. Remplacer les informations de démonstration restantes (email, ICE)
+1. Remplacer l'email de démonstration (`contact@babweb.ma`)
 2. Configurer Telegram et Resend, tester un envoi du formulaire
 3. Acheter le nom de domaine et le relier à Cloudflare Pages
 4. Vérifier le domaine dans Resend pour activer les emails aux prospects
