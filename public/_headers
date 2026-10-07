@@ -1,3 +1,5 @@
+# En-têtes HTTP appliqués par Cloudflare Pages (copié tel quel dans dist/ au build).
+
 /*
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
@@ -13,12 +15,3 @@
 /fonts/*
   Cache-Control: public, max-age=31536000, immutable
   Access-Control-Allow-Origin: *
-
-/docs/*
-  X-Robots-Tag: noindex, nofollow
-
-/README.md
-  X-Robots-Tag: noindex, nofollow
-
-/functions/*
-  X-Robots-Tag: noindex, nofollow

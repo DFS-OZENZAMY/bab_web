@@ -1,28 +1,56 @@
-# Bab Web – Site vitrine
+# Bab Web – site vitrine
+
+Site d'une page pour Bab Web (création de sites vitrines au Maroc), hébergé sur Cloudflare Pages.
 
 📄 Documentation complète : [docs/FICHE-TECHNIQUE.md](docs/FICHE-TECHNIQUE.md)
+🎨 Maquette Figma (desktop et mobile) : https://www.figma.com/design/qvOyTFszSx0Zqbo9SJBI1y
 
-Site statique (un seul fichier `index.html`), prêt pour Cloudflare Pages.
+## Modifier un texte, un prix ou un numéro
 
-## À personnaliser avant la mise en ligne
-1. Numéro WhatsApp : +33 7 58 98 43 18 (déjà configuré).
-2. Remplacer `contact@babweb.ma` par ton email.
-3. Créer une clé gratuite sur https://web3forms.com et remplacer `VOTRE_CLE_WEB3FORMS`.
-   (Sans clé, le formulaire ouvre WhatsApp avec le message prérempli.)
+Tout est dans **un seul fichier** : [`src/data/site.json`](src/data/site.json).
+Un prix modifié là est mis à jour partout : la page, les données Google, `llms.txt` et les emails envoyés aux prospects.
 
-## Déploiement
-GitHub → Cloudflare Pages → Connect to Git → choisir le dépôt
-Framework preset : None · Build command : (vide) · Output directory : /
+Ensuite :
 
-## SEO
-- Si l'adresse Cloudflare n'est pas `bab-web.pages.dev` (ou quand tu auras ton domaine), remplace
-  `https://bab-web.pages.dev` partout dans `index.html`, `robots.txt` et `sitemap.xml`.
-- Remplace aussi le téléphone et l'email dans le bloc `application/ld+json` de `index.html`.
-- Après la mise en ligne : ajoute le site dans Google Search Console et envoie `sitemap.xml`.
+```bash
+npm run build   # vérifie et construit le site dans dist/
+git push        # Cloudflare reconstruit et met en ligne en une minute
+```
 
-## Système de leads (functions/api/lead.js)
-Chaque demande du formulaire : notification Telegram + email pour toi, email personnalisé (IA) pour le prospect.
-À configurer dans Cloudflare → Workers & Pages → bab-web → Settings :
-- Variables and Secrets : TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, RESEND_API_KEY, FROM_EMAIL, OWNER_EMAIL, WHATSAPP
-- Bindings : Workers AI → nom `AI` ; KV namespace (optionnel) → nom `LEADS`
-Puis redéployer (Deployments → Retry deployment).
+Si une erreur est détectée (prix mal écrit, icône inconnue, lien cassé…), le build s'arrête avec un message en français et le site en ligne n'est pas touché.
+
+## Travailler en local
+
+Il faut seulement [Node.js](https://nodejs.org) 18 ou plus. Aucune installation de paquet.
+
+```bash
+npm run dev     # http://localhost:8788, reconstruit à chaque modification
+```
+
+## Organisation
+
+```
+src/
+  data/site.json        textes, prix, coordonnées, FAQ, secteurs  ← 90 % des modifications
+  styles/               CSS, un fichier par section (02-variables.css = couleurs)
+  sections/             HTML de chaque section de la page
+  illustrations/        dessins SVG (arche, lanterne, médina, icônes)
+  scripts/              JavaScript du navigateur (démo, formulaire)
+  pages/                assemblage des pages (accueil, 404, balises <head>)
+  seo/                  données Google, llms.txt, robots.txt, sitemap
+  lib/                  outils partagés (prix, échappement HTML)
+public/                 fichiers copiés tels quels (polices, icônes, image de partage)
+functions/api/lead.js   réception du formulaire (Telegram, emails, IA)
+scripts/                build, vérifications, serveur local
+docs/                   fiche technique
+```
+
+## Réglages Cloudflare Pages
+
+| Réglage | Valeur |
+|---|---|
+| Build command | `npm run build` |
+| Build output directory | `dist` |
+| Variable d'environnement | `NODE_VERSION` = `22` (optionnel) |
+
+Les variables et liaisons du formulaire (Telegram, Resend, IA) sont décrites dans la fiche technique.

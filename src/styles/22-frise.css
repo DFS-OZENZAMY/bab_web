@@ -1,0 +1,8 @@
+/* Frise zellige entre l'en-tête et les tarifs. */
+
+.frise {
+  display: block;
+  width: 100%;
+  height: 56px;
+  color: var(--safran);
+}

@@ -1,0 +1,54 @@
+/* Couleurs, polices et thème sombre. Modifier une couleur ici la change partout. */
+
+:root {
+  --majorelle: #2438A6;
+  --deep: #16226B;
+  --night: #0E1550;
+  --safran: #F2B33D;
+  --safran-l: #F7D58A;
+  --menthe: #1F5545;
+  --terre: #B4532C;
+  --fond: #F8F4EC;
+  --fond-2:#F3ECDD;
+  --sable: #EFE6D4;
+  --encre: #141A3A;
+  --texte: #2B3150;
+  --doux: #5D6487;
+  --ligne: rgba(20,26,58,.09);
+  --carte: #FFFFFF;
+  --accent: #2438A6;
+  --display: "Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body: "Readex Pro","Segoe UI",system-ui,sans-serif;
+  --serif: "Instrument Serif",Georgia,"Times New Roman",serif;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top,0px);
+  padding-bottom: env(safe-area-inset-bottom,0px);
+}
+
+@media (prefers-color-scheme:dark) {
+  :root:not([data-theme="light"]) {
+    --fond: #0F1430;
+    --fond-2:#131A3C;
+    --sable: #1E2650;
+    --encre: #F4F5FA;
+    --texte: #D5D8EA;
+    --doux: #A3A9CC;
+    --ligne: rgba(255,255,255,.1);
+    --carte: #171D42;
+    --accent: #A9B5FF;
+    --terre: #F0A07A;
+  }
+}
+
+:root[data-theme="dark"] {
+  --fond: #0F1430;
+  --fond-2:#131A3C;
+  --sable: #1E2650;
+  --encre: #F4F5FA;
+  --texte: #D5D8EA;
+  --doux: #A3A9CC;
+  --ligne: rgba(255,255,255,.1);
+  --carte: #171D42;
+  --accent: #A9B5FF;
+  --terre: #F0A07A;
+}

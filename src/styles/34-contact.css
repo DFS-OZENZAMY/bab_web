@@ -1,0 +1,167 @@
+/* Section contact et formulaire de devis. */
+
+.contact {
+  background: linear-gradient(180deg,#16226B,#0E1550);
+  color: #D5D8EA;
+  padding-bottom: 0;
+}
+
+.contact h2 {
+  color: #fff;
+}
+
+.contact .intro {
+  color: #AEB5DF;
+}
+
+.contact .wrap {
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: clamp(2rem,6vw,5rem);
+  align-items: start;
+}
+
+.direct {
+  display: grid;
+  gap: 1.1rem;
+  margin-top: 2.2rem;
+}
+
+.direct a {
+  display: flex;
+  align-items: center;
+  gap: .9rem;
+  text-decoration: none;
+  color: #fff;
+}
+
+.direct svg {
+  width: 48px;
+  height: 48px;
+  flex: none;
+}
+
+.direct b {
+  display: block;
+  font-family: var(--display);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.direct span {
+  font-size: .85rem;
+  color: #AEB5DF;
+}
+
+form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  background: rgba(255,255,255,.06);
+  padding: 2rem;
+  border-radius: 36px 36px 28px 28px;
+  border: 1px solid rgba(255,255,255,.14);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+form .full {
+  grid-column: 1/-1;
+}
+
+form h3 {
+  color: #fff;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: .2rem;
+}
+
+label {
+  display: grid;
+  gap: .4rem;
+  font-size: .85rem;
+  color: #C6CBEB;
+}
+
+input,select,textarea {
+  font: inherit;
+  font-weight: 400;
+  font-size: 1rem;
+  padding: .85rem 1rem;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.2);
+  background: rgba(255,255,255,.08);
+  color: #fff;
+  width: 100%;
+}
+
+input::placeholder,textarea::placeholder {
+  color: #8F97C8;
+}
+
+input:focus,select:focus,textarea:focus {
+  border-color: var(--safran);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(242,179,61,.25);
+}
+
+select option {
+  color: #141A3A;
+}
+
+textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+.hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+label.check {
+  display: flex;
+  gap: .65rem;
+  align-items: flex-start;
+  font-size: .85rem;
+  line-height: 1.45;
+}
+
+label.check input {
+  width: 1.1rem;
+  height: 1.1rem;
+  margin-top: .15rem;
+  flex: none;
+  accent-color: #F2B33D;
+  padding: 0;
+}
+
+.form-note {
+  font-size: .9rem;
+  min-height: 1.2em;
+  margin: 0;
+  color: var(--safran);
+}
+
+.skyline {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: clamp(2rem,6vw,4rem);
+}
+
+@media (max-width:860px) {
+  .contact .wrap {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width:520px) {
+  form {
+    grid-template-columns: 1fr;
+    padding: 1.4rem;
+  }
+}

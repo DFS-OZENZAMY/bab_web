@@ -1,0 +1,35 @@
+/* Pied de page et bouton WhatsApp flottant. */
+
+footer {
+  padding: 1.8rem 0;
+  font-size: .88rem;
+  color: #8F97C8;
+  background: #0A0F3D;
+}
+
+footer .wrap {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.wa-float {
+  position: fixed;
+  right: 1.1rem;
+  bottom: calc(1.1rem + env(safe-area-inset-bottom,0px));
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #25D366;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 10px 25px -8px rgba(0,0,0,.45);
+  z-index: 40;
+}
+
+.wa-float svg {
+  width: 30px;
+  height: 30px;
+  fill: #fff;
+}
