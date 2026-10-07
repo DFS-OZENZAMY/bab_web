@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bab Web · Sites vitrines pour les entreprises marocaines</title>
+<meta name="description" content="Création de sites vitrines rapides, bilingues français/arabe, pour restaurants, riads, cabinets et commerces au Maroc. À partir de 1 500 DH.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%232438A6'/><path d='M18 54V30a14 14 0 0 1 28 0v24' fill='none' stroke='%23F2B33D' stroke-width='6'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Readex+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --majorelle:#2438A6; --majorelle-deep:#16226B; --safran:#F2B33D; --menthe:#2F6B57;
+  --craie:#F4F5FA; --encre:#141A3A; --texte:#2B3150; --doux:#5D6487; --ligne:#D9DCEA; --carte:#FFFFFF;
+  --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body:"Readex Pro", "Segoe UI", system-ui, sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --craie:#0F1430; --encre:#F4F5FA; --texte:#D5D8EA; --doux:#9AA0C4; --ligne:#2A3160; --carte:#171D42; --majorelle:#5C70E6;
+}}
+:root[data-theme="dark"]{--craie:#0F1430; --encre:#F4F5FA; --texte:#D5D8EA; --doux:#9AA0C4; --ligne:#2A3160; --carte:#171D42; --majorelle:#5C70E6;}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth; scroll-padding-top:calc(env(safe-area-inset-top,0px) + 72px)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{margin:0;background:var(--craie);color:var(--texte);font-family:var(--body);font-weight:300;font-size:1.0625rem;line-height:1.6}
+img,svg{max-width:100%}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--safran);outline-offset:3px;border-radius:4px}
+.wrap{width:min(1120px,100% - 2.5rem);margin-inline:auto}
+h1,h2,h3{font-family:var(--display);color:var(--encre);line-height:1.08;margin:0;letter-spacing:-.02em}
+h2{font-size:clamp(2rem,4.5vw,3.1rem);font-weight:700;max-width:18ch}
+.intro{color:var(--doux);max-width:58ch;margin:.9rem 0 0}
+section{padding:clamp(4rem,9vw,7rem) 0}
+
+/* Navigation */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:color-mix(in srgb,var(--craie) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--ligne)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:1rem}
+.logo{display:flex;align-items:center;gap:.6rem;font-family:var(--display);font-weight:800;font-size:1.25rem;color:var(--encre);text-decoration:none}
+.logo svg{width:30px;height:30px}
+.nav ul{display:flex;gap:1.6rem;list-style:none;margin:0;padding:0;font-size:.95rem}
+.nav ul a{text-decoration:none;color:var(--doux)}
+.nav ul a:hover{color:var(--encre)}
+.btn{display:inline-flex;align-items:center;gap:.55rem;font-family:var(--body);font-weight:500;font-size:1rem;text-decoration:none;border:0;cursor:pointer;padding:.85rem 1.4rem;border-radius:999px;background:var(--safran);color:#1C1606;transition:transform .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn.ghost{background:transparent;color:var(--encre);box-shadow:inset 0 0 0 1.5px var(--ligne)}
+.btn svg{width:18px;height:18px}
+@media (max-width:760px){.nav ul{display:none}.nav .btn{padding:.6rem 1rem;font-size:.9rem}}
+
+/* Hero */
+.hero{padding:clamp(3rem,7vw,5.5rem) 0 clamp(4rem,8vw,6rem);overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:3rem;align-items:center}
+.hero h1{font-size:clamp(2.6rem,6.6vw,5.1rem);font-weight:800}
+.hero .ar{font-family:var(--body);font-weight:500;color:var(--majorelle);font-size:1.25rem;margin:1.2rem 0 0;direction:rtl;text-align:left}
+.hero p.lead{font-size:1.2rem;max-width:44ch;margin:1.2rem 0 2rem;color:var(--texte)}
+.cta-row{display:flex;flex-wrap:wrap;gap:.8rem}
+.facts{display:flex;flex-wrap:wrap;gap:1.6rem;margin-top:2.4rem;color:var(--doux);font-size:.95rem}
+.facts strong{display:block;font-family:var(--display);font-size:1.35rem;color:var(--encre);font-weight:700}
+@media (max-width:900px){.hero .wrap{grid-template-columns:1fr}}
+
+/* Démo téléphone : l'élément signature */
+.demo{display:flex;flex-direction:column;align-items:center;gap:1.1rem}
+.arch{position:relative;width:min(320px,100%);padding:14px;border-radius:170px 170px 34px 34px;background:var(--majorelle);box-shadow:0 30px 60px -30px rgba(22,34,107,.6)}
+.arch::before{content:"";position:absolute;inset:-10px;border-radius:180px 180px 42px 42px;border:2px dashed color-mix(in srgb,var(--safran) 70%,transparent);pointer-events:none}
+.screen{background:#fff;border-radius:156px 156px 24px 24px;overflow:hidden;aspect-ratio:9/16;display:flex;flex-direction:column;color:#1d2240}
+.screen .top{flex:0 0 46%;display:flex;flex-direction:column;justify-content:flex-end;padding:1.2rem;color:#fff;transition:background .4s}
+.screen .top small{font-size:.75rem;opacity:.85}
+.screen .top b{font-family:var(--display);font-size:1.5rem;line-height:1.05}
+.screen .body{padding:1rem 1.1rem;display:flex;flex-direction:column;gap:.55rem;font-size:.8rem}
+.screen .row{display:flex;justify-content:space-between;border-bottom:1px solid #ECEEF6;padding-bottom:.45rem}
+.screen .wa{margin-top:auto;background:#25D366;color:#fff;border-radius:999px;text-align:center;padding:.6rem;font-weight:500;font-size:.85rem}
+.screen .body{flex:1}
+.tabs{display:flex;gap:.4rem;background:var(--carte);padding:.3rem;border-radius:999px;border:1px solid var(--ligne)}
+.tabs button{font:inherit;font-size:.88rem;border:0;background:transparent;color:var(--doux);padding:.45rem .9rem;border-radius:999px;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--majorelle);color:#fff}
+.demo .cap{font-size:.85rem;color:var(--doux);text-align:center;max-width:30ch;margin:0}
+
+/* Offres */
+.packs{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:3rem;align-items:start}
+.pack{background:var(--carte);border:1px solid var(--ligne);border-radius:22px;padding:1.8rem}
+.pack.featured{background:var(--majorelle-deep);border-color:var(--majorelle-deep);color:#D5D8EA;transform:translateY(-14px)}
+.pack.featured h3,.pack.featured .price{color:#fff}
+.pack .tag{display:inline-block;background:var(--safran);color:#1C1606;font-size:.8rem;font-weight:500;padding:.2rem .7rem;border-radius:999px;margin-bottom:1rem}
+.pack h3{font-size:1.5rem}
+.pack .for{margin:.3rem 0 1.2rem;font-size:.95rem;opacity:.8}
+.price{font-family:var(--display);font-weight:800;font-size:2.4rem;color:var(--encre);line-height:1}
+.price span{font-size:1rem;font-weight:500;font-family:var(--body)}
+.pack ul{list-style:none;padding:0;margin:1.4rem 0 1.6rem;display:grid;gap:.55rem;font-size:.97rem}
+.pack li{padding-left:1.6rem;position:relative}
+.pack li::before{content:"";position:absolute;left:0;top:.5em;width:.75rem;height:.75rem;border-radius:3px;background:var(--safran);transform:rotate(45deg)}
+.pack .btn{width:100%;justify-content:center}
+.pack:not(.featured) .btn{background:transparent;color:var(--encre);box-shadow:inset 0 0 0 1.5px var(--ligne)}
+.extras{margin-top:2.5rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem}
+.extra{border-top:2px solid var(--encre);padding-top:.9rem}
+.extra b{font-family:var(--display);color:var(--encre);font-size:1.1rem;display:block}
+.extra span{color:var(--doux);font-size:.95rem}
+@media (max-width:900px){.packs{grid-template-columns:1fr}.pack.featured{transform:none}}
+
+/* Secteurs */
+.sectors{background:var(--menthe);color:#E3F0EA}
+.sectors h2{color:#fff}
+.sectors .intro{color:#BCD8CC}
+.chips{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:2.4rem}
+.chips span{border:1.5px solid rgba(255,255,255,.35);border-radius:999px;padding:.6rem 1.15rem;font-size:1rem;color:#fff}
+
+/* Étapes */
+.steps{list-style:none;padding:0;margin:3rem 0 0;display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;counter-reset:s}
+.steps li{counter-increment:s;position:relative;padding-top:3.4rem}
+.steps li::before{content:counter(s);position:absolute;top:0;left:0;width:2.6rem;height:2.6rem;border-radius:50%;display:grid;place-items:center;background:var(--safran);color:#1C1606;font-family:var(--display);font-weight:800;font-size:1.15rem}
+.steps li:not(:last-child)::after{content:"";position:absolute;top:1.3rem;left:3.2rem;right:-1rem;border-top:2px dotted var(--ligne)}
+.steps h3{font-size:1.2rem;margin-bottom:.35rem}
+.steps p{margin:0;color:var(--doux);font-size:.96rem}
+.steps em{font-style:normal;color:var(--majorelle);font-weight:500}
+@media (max-width:860px){.steps{grid-template-columns:1fr 1fr}.steps li::after{display:none}}
+@media (max-width:520px){.steps{grid-template-columns:1fr}}
+
+/* FAQ */
+.faq{display:grid;grid-template-columns:.8fr 1.2fr;gap:3rem}
+details{border-bottom:1px solid var(--ligne);padding:1.15rem 0}
+summary{cursor:pointer;font-family:var(--display);font-weight:700;font-size:1.15rem;color:var(--encre);list-style:none;display:flex;justify-content:space-between;gap:1rem}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--majorelle);font-size:1.4rem;line-height:1;transition:transform .2s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{margin:.7rem 0 0;color:var(--doux);max-width:60ch}
+@media (max-width:860px){.faq{grid-template-columns:1fr}}
+
+/* Contact */
+.contact{background:var(--majorelle-deep);color:#D5D8EA}
+.contact h2{color:#fff}
+.contact .wrap{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+.contact .intro{color:#AEB5DF}
+form{display:grid;gap:1rem;background:rgba(255,255,255,.06);padding:1.6rem;border-radius:22px;border:1px solid rgba(255,255,255,.12)}
+label{display:grid;gap:.35rem;font-size:.9rem;color:#C6CBEB}
+input,select,textarea{font:inherit;font-weight:400;padding:.8rem 1rem;border-radius:12px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:#fff}
+select option{color:#141A3A}
+textarea{min-height:110px;resize:vertical}
+.form-note{font-size:.88rem;min-height:1.2em;margin:0;color:var(--safran)}
+.direct{display:grid;gap:.9rem;margin-top:2rem}
+.direct a{display:flex;align-items:center;gap:.8rem;text-decoration:none;color:#fff;font-size:1.05rem}
+.direct svg{width:22px;height:22px;flex:none}
+@media (max-width:860px){.contact .wrap{grid-template-columns:1fr}}
+
+footer{padding:2rem 0;font-size:.9rem;color:var(--doux);border-top:1px solid var(--ligne)}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+
+.wa-float{position:fixed;right:1.1rem;bottom:calc(1.1rem + env(safe-area-inset-bottom,0px));width:58px;height:58px;border-radius:50%;background:#25D366;display:grid;place-items:center;box-shadow:0 10px 25px -8px rgba(0,0,0,.45);z-index:20}
+.wa-float svg{width:30px;height:30px;fill:#fff}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Navigation principale">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Bab Web, accueil">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#2438A6"/><path d="M18 54V30a14 14 0 0 1 28 0v24" fill="none" stroke="#F2B33D" stroke-width="6"/></svg>
+      Bab Web
+    </a>
+    <ul>
+      <li><a href="#offres">Offres</a></li>
+      <li><a href="#methode">Méthode</a></li>
+      <li><a href="#faq">Questions</a></li>
+    </ul>
+    <a class="btn" href="#contact">Demander un devis</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <h1>Votre commerce mérite une vraie porte d'entrée en ligne.</h1>
+      <p class="ar" lang="ar">موقع إلكتروني احترافي لنشاطك، بالعربية والفرنسية</p>
+      <p class="lead">Je crée des sites vitrines rapides et bilingues pour les restaurants, riads, cabinets et commerces au Maroc. Vos clients vous trouvent sur Google et vous écrivent directement sur WhatsApp.</p>
+      <div class="cta-row">
+        <a class="btn" href="#contact">Demander un devis gratuit</a>
+        <a class="btn ghost" href="#offres">Voir les tarifs</a>
+      </div>
+      <div class="facts">
+        <div><strong>7 à 15 jours</strong>de la commande à la mise en ligne</div>
+        <div><strong>FR · AR · EN</strong>versions linguistiques</div>
+        <div><strong>dès 1 500 DH</strong>sans frais cachés</div>
+      </div>
+    </div>
+
+    <div class="demo">
+      <div class="arch">
+        <div class="screen" aria-live="polite">
+          <div class="top" id="d-top"><small id="d-kicker"></small><b id="d-name"></b></div>
+          <div class="body" id="d-body"></div>
+        </div>
+      </div>
+      <div class="tabs" role="tablist" aria-label="Exemples de sites">
+        <button role="tab" aria-selected="true" data-k="riad">Riad</button>
+        <button role="tab" aria-selected="false" data-k="resto">Restaurant</button>
+        <button role="tab" aria-selected="false" data-k="dentiste">Cabinet</button>
+      </div>
+      <p class="cap">Exemples de sites que je peux créer pour votre activité.</p>
+    </div>
+  </div>
+</header>
+
+<section id="offres">
+  <div class="wrap">
+    <h2>Trois formules, un prix clair dès le départ.</h2>
+    <p class="intro">Le nom de domaine reste à votre nom. Le site est hébergé sur une infrastructure rapide et sécurisée, avec certificat SSL inclus.</p>
+
+    <div class="packs">
+      <article class="pack">
+        <h3>Essentiel</h3>
+        <p class="for">Pour être présent en ligne rapidement</p>
+        <div class="price">1 500 <span>DH</span></div>
+        <ul>
+          <li>Site d'une page, adapté au mobile</li>
+          <li>Bouton WhatsApp et appel direct</li>
+          <li>Formulaire de contact</li>
+          <li>Carte Google Maps intégrée</li>
+          <li>Mise en ligne en 7 jours</li>
+        </ul>
+        <a class="btn" href="#contact" data-pack="Essentiel">Choisir Essentiel</a>
+      </article>
+
+      <article class="pack featured">
+        <span class="tag">Le plus demandé</span>
+        <h3>Business</h3>
+        <p class="for">Pour attirer de nouveaux clients</p>
+        <div class="price">3 500 <span>DH</span></div>
+        <ul>
+          <li>Jusqu'à 6 pages</li>
+          <li>Version française et arabe</li>
+          <li>Référencement Google de base</li>
+          <li>Fiche Google Business optimisée</li>
+          <li>Adresse email professionnelle</li>
+          <li>Première année d'hébergement offerte</li>
+        </ul>
+        <a class="btn" href="#contact" data-pack="Business">Choisir Business</a>
+      </article>
+
+      <article class="pack">
+        <h3>Premium</h3>
+        <p class="for">Pour une image haut de gamme</p>
+        <div class="price">6 500 <span>DH</span></div>
+        <ul>
+          <li>Pages illimitées, design sur mesure</li>
+          <li>Français, arabe et anglais</li>
+          <li>Rédaction des textes incluse</li>
+          <li>Galerie photo et blog</li>
+          <li>3 mois de maintenance offerts</li>
+        </ul>
+        <a class="btn" href="#contact" data-pack="Premium">Choisir Premium</a>
+      </article>
+    </div>
+
+    <div class="extras">
+      <div class="extra"><b>Hébergement et domaine</b><span>800 DH par an, email et sécurité inclus</span></div>
+      <div class="extra"><b>Maintenance</b><span>250 DH par mois, modifications illimitées</span></div>
+      <div class="extra"><b>Création de logo</b><span>à partir de 800 DH</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sectors">
+  <div class="wrap">
+    <h2>Des sites pensés pour votre métier.</h2>
+    <p class="intro">Chaque secteur a ses besoins : réservations pour un riad, menu pour un restaurant, prise de rendez-vous pour un cabinet.</p>
+    <div class="chips">
+      <span>Riads et maisons d'hôtes</span><span>Restaurants et cafés</span><span>Cabinets médicaux et dentaires</span>
+      <span>Avocats et notaires</span><span>Salons de beauté et spas</span><span>Auto-écoles</span>
+      <span>Écoles et centres de formation</span><span>Coopératives et artisans</span><span>Agences immobilières</span><span>Agences de voyage</span>
+    </div>
+  </div>
+</section>
+
+<section id="methode">
+  <div class="wrap">
+    <h2>Comment se déroule votre projet.</h2>
+    <ol class="steps">
+      <li><h3>On échange</h3><p>Un appel ou un message WhatsApp pour comprendre votre activité. <em>Devis sous 24 h.</em></p></li>
+      <li><h3>Je conçois</h3><p>Vous recevez une maquette à valider, après un acompte de 50 %.</p></li>
+      <li><h3>Vous ajustez</h3><p>Deux séries de modifications incluses pour que tout vous ressemble.</p></li>
+      <li><h3>Mise en ligne</h3><p>Votre site est publié sur votre nom de domaine. Vous réglez le solde.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap faq">
+    <div>
+      <h2>Vos questions.</h2>
+      <p class="intro">Une autre question ? Écrivez-moi sur WhatsApp, je réponds dans la journée.</p>
+    </div>
+    <div>
+      <details><summary>Le site m'appartient-il ?</summary><p>Oui. Le nom de domaine est enregistré à votre nom et vous recevez tous les accès à la livraison.</p></details>
+      <details><summary>Que dois-je fournir ?</summary><p>Votre logo si vous en avez un, quelques photos, vos horaires et vos coordonnées. Je vous envoie une liste simple au début du projet.</p></details>
+      <details><summary>Puis-je modifier le site moi-même ?</summary><p>Oui, si vous le souhaitez je peux ajouter un espace de modification simple. Sinon, la formule maintenance couvre toutes vos mises à jour.</p></details>
+      <details><summary>Comment se passe le paiement ?</summary><p>50 % au démarrage et 50 % avant la mise en ligne, par virement bancaire ou en espèces. Une facture est remise à chaque paiement.</p></details>
+      <details><summary>Mon site sera-t-il visible sur Google ?</summary><p>Oui. Les formules Business et Premium incluent le référencement de base et l'optimisation de votre fiche Google Business, essentielle pour apparaître sur Google Maps.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div>
+      <h2>Parlons de votre site.</h2>
+      <p class="intro">Décrivez votre activité en quelques mots. Je vous réponds avec une proposition et un prix sous 24 heures.</p>
+      <div class="direct">
+        <a href="https://wa.me/212600000000" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="#25D366" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.5.1.3.6 1 1.3 1.6.9.8 1.6 1 1.9 1.2.2.1.4.1.5-.1l.7-.9c.2-.2.4-.2.6-.1l1.9.9c.3.1.4.2.5.3 0 .2 0 .7-.2 1.3Z"/></svg>
+          +212 6 00 00 00 00
+        </a>
+        <a href="mailto:contact@babweb.ma">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#F2B33D" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+          contact@babweb.ma
+        </a>
+      </div>
+    </div>
+
+    <form id="devis" novalidate>
+      <input type="hidden" name="access_key" value="VOTRE_CLE_WEB3FORMS">
+      <input type="hidden" name="subject" value="Nouvelle demande de devis - Bab Web">
+      <label>Votre nom<input name="nom" required autocomplete="name"></label>
+      <label>Téléphone ou WhatsApp<input name="telephone" type="tel" required autocomplete="tel" placeholder="06 00 00 00 00"></label>
+      <label>Formule souhaitée
+        <select name="formule" id="formule">
+          <option>Je ne sais pas encore</option><option>Essentiel</option><option>Business</option><option>Premium</option>
+        </select>
+      </label>
+      <label>Votre activité<textarea name="message" placeholder="Ex. : restaurant à Marrakech, je veux afficher mon menu et recevoir des réservations."></textarea></label>
+      <button class="btn" type="submit">Envoyer ma demande</button>
+      <p class="form-note" id="form-note" role="status"></p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="annee"></span> Bab Web · Création de sites vitrines au Maroc</span>
+    <span>Auto-entrepreneur · ICE : à compléter</span>
+  </div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/212600000000" target="_blank" rel="noopener" aria-label="Écrire sur WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.5.1.3.6 1 1.3 1.6.9.8 1.6 1 1.9 1.2.2.1.4.1.5-.1l.7-.9c.2-.2.4-.2.6-.1l1.9.9c.3.1.4.2.5.3 0 .2 0 .7-.2 1.3Z"/></svg>
+</a>
+
+<script>
+document.getElementById('annee').textContent = new Date().getFullYear();
+
+// Démo interactive
+const demos = {
+  riad: {bg:'linear-gradient(160deg,#B5552B,#6E2A14)', kicker:'Marrakech · Médina', name:'Riad Dar Lina',
+    rows:[['Chambre double','dès 650 DH'],['Suite patio','dès 980 DH'],['Petit-déjeuner','inclus']], cta:'Réserver sur WhatsApp'},
+  resto: {bg:'linear-gradient(160deg,#2F6B57,#143A2D)', kicker:'Casablanca · Maârif', name:'Dar Tajine',
+    rows:[['Tajine de poulet','75 DH'],['Couscous royal','110 DH'],['Thé à la menthe','15 DH']], cta:'Commander sur WhatsApp'},
+  dentiste: {bg:'linear-gradient(160deg,#2438A6,#16226B)', kicker:'Rabat · Agdal', name:'Cabinet Dr Benali',
+    rows:[['Consultation','Lun – Sam'],['Détartrage','sur RDV'],['Urgences','7j/7']], cta:'Prendre rendez-vous'}
+};
+function show(k){
+  const d = demos[k];
+  document.getElementById('d-top').style.background = d.bg;
+  document.getElementById('d-kicker').textContent = d.kicker;
+  document.getElementById('d-name').textContent = d.name;
+  document.getElementById('d-body').innerHTML =
+    d.rows.map(r => `<div class="row"><span>${r[0]}</span><strong>${r[1]}</strong></div>`).join('') +
+    `<div class="wa">${d.cta}</div>`;
+  document.querySelectorAll('.tabs button').forEach(b => b.setAttribute('aria-selected', b.dataset.k === k));
+}
+document.querySelectorAll('.tabs button').forEach(b => b.addEventListener('click', () => show(b.dataset.k)));
+show('riad');
+
+// Préremplir la formule depuis les cartes d'offres
+document.querySelectorAll('[data-pack]').forEach(a => a.addEventListener('click', () => {
+  document.getElementById('formule').value = a.dataset.pack;
+}));
+
+// Formulaire (Web3Forms, gratuit)
+const form = document.getElementById('devis'), note = document.getElementById('form-note');
+form.addEventListener('submit', async e => {
+  e.preventDefault();
+  if (!form.nom.value.trim() || !form.telephone.value.trim()) { note.textContent = 'Indiquez votre nom et votre numéro pour que je puisse vous répondre.'; return; }
+  const key = form.access_key.value;
+  if (key.startsWith('VOTRE')) {
+    const txt = `Bonjour, je suis ${form.nom.value}. Formule : ${form.formule.value}. ${form.message.value}`;
+    window.open('https://wa.me/212600000000?text=' + encodeURIComponent(txt), '_blank');
+    note.textContent = 'Votre demande s\'ouvre dans WhatsApp.'; return;
+  }
+  note.textContent = 'Envoi en cours…';
+  try {
+    const r = await fetch('https://api.web3forms.com/submit', {method:'POST', body:new FormData(form)});
+    const j = await r.json();
+    note.textContent = j.success ? 'Demande envoyée. Je vous réponds sous 24 heures.' : 'L\'envoi a échoué. Écrivez-moi directement sur WhatsApp.';
+    if (j.success) form.reset();
+  } catch { note.textContent = 'L\'envoi a échoué. Écrivez-moi directement sur WhatsApp.'; }
+});
+</script>
+</body>
+</html>
