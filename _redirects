@@ -1,0 +1,5 @@
+# Documentation et code serveur : pas d'accès public
+/docs/*        /  302
+/docs          /  302
+/README.md     /  302
+/functions/*   /  302

@@ -1,5 +1,7 @@
 # Bab Web – Site vitrine
 
+📄 Documentation complète : [docs/FICHE-TECHNIQUE.md](docs/FICHE-TECHNIQUE.md)
+
 Site statique (un seul fichier `index.html`), prêt pour Cloudflare Pages.
 
 ## À personnaliser avant la mise en ligne
