@@ -1,0 +1,26 @@
+# Bab Web
+
+> Bab Web est un service freelance de création de sites vitrines pour les entreprises au Maroc : restaurants, riads et maisons d'hôtes, cabinets médicaux et dentaires, avocats, salons de beauté, auto-écoles, écoles, coopératives, agences immobilières et agences de voyage. Sites rapides, adaptés au mobile, en français, en arabe et en anglais, avec contact WhatsApp. Statut : auto-entrepreneur au Maroc.
+
+## Tarifs (en dirhams marocains, MAD)
+
+- Formule Essentiel : 1 500 DH. Site d'une page adapté au mobile, bouton WhatsApp et appel direct, formulaire de contact, carte Google Maps, mise en ligne en 7 jours.
+- Formule Business : 3 500 DH. Jusqu'à 6 pages, version française et arabe, référencement Google de base, fiche Google Business optimisée, adresse email professionnelle, première année d'hébergement offerte.
+- Formule Premium : 6 500 DH. Pages illimitées et design sur mesure, français, arabe et anglais, rédaction des textes, galerie photo et blog, 3 mois de maintenance offerts.
+- Hébergement et nom de domaine : 800 DH par an, email et sécurité inclus.
+- Maintenance : 250 DH par mois, modifications illimitées.
+- Création de logo : à partir de 800 DH.
+
+## Fonctionnement
+
+- Zone : tout le Maroc (Casablanca, Rabat, Marrakech, Tanger, Fès, Agadir et autres villes), à distance ou en rendez-vous.
+- Délai : 7 à 15 jours de la commande à la mise en ligne.
+- Paiement : 50 % au démarrage, 50 % avant la mise en ligne, par virement ou en espèces, avec facture.
+- Le nom de domaine est enregistré au nom du client, qui reçoit tous les accès.
+- Devis gratuit sous 24 heures.
+
+## Contact
+
+- Site : https://bab-web.pages.dev/
+- WhatsApp : +212 6 00 00 00 00
+- Email : contact@babweb.ma
