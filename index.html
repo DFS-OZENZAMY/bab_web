@@ -91,7 +91,7 @@
 @font-face{font-family:"Readex Pro";src:url(/fonts/readex.woff2) format("woff2");font-weight:160 700;font-style:normal;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 @font-face{font-family:"Readex Pro";src:url(/fonts/readex-arabe.woff2) format("woff2");font-weight:160 700;font-style:normal;font-display:swap;unicode-range:U+0600-06FF,U+0750-077F,U+200C-200E,U+FB50-FDFF,U+FE70-FEFC}
 :root{
-  --majorelle:#2438A6; --majorelle-deep:#16226B; --safran:#F2B33D; --menthe:#2F6B57;
+  --majorelle:#2438A6; --majorelle-deep:#16226B; --safran:#F2B33D; --menthe:#1F5545;
   --craie:#F4F5FA; --encre:#141A3A; --texte:#2B3150; --doux:#5D6487; --ligne:#D9DCEA; --carte:#FFFFFF;
   --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
   --body:"Readex Pro", "Segoe UI", system-ui, sans-serif;
@@ -99,9 +99,9 @@
   padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --craie:#0F1430; --encre:#F4F5FA; --texte:#D5D8EA; --doux:#9AA0C4; --ligne:#2A3160; --carte:#171D42; --majorelle:#5C70E6;
+  --craie:#0F1430; --encre:#F4F5FA; --texte:#D5D8EA; --doux:#9AA0C4; --ligne:#2A3160; --carte:#171D42; --majorelle:#8C9BF2;
 }}
-:root[data-theme="dark"]{--craie:#0F1430; --encre:#F4F5FA; --texte:#D5D8EA; --doux:#9AA0C4; --ligne:#2A3160; --carte:#171D42; --majorelle:#5C70E6;}
+:root[data-theme="dark"]{--craie:#0F1430; --encre:#F4F5FA; --texte:#D5D8EA; --doux:#9AA0C4; --ligne:#2A3160; --carte:#171D42; --majorelle:#8C9BF2;}
 *,*::before,*::after{box-sizing:inherit}
 html{scroll-behavior:smooth; scroll-padding-top:calc(env(safe-area-inset-top,0px) + 72px)}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
@@ -150,11 +150,11 @@ section{padding:clamp(4rem,9vw,7rem) 0}
 .screen .top b{font-family:var(--display);font-size:1.5rem;line-height:1.05}
 .screen .body{padding:1rem 1.1rem;display:flex;flex-direction:column;gap:.55rem;font-size:.8rem}
 .screen .row{display:flex;justify-content:space-between;border-bottom:1px solid #ECEEF6;padding-bottom:.45rem}
-.screen .wa{margin-top:auto;background:#25D366;color:#fff;border-radius:999px;text-align:center;padding:.6rem;font-weight:500;font-size:.85rem}
+.screen .wa{margin-top:auto;background:#0B7A3E;color:#fff;border-radius:999px;text-align:center;padding:.6rem;font-weight:500;font-size:.85rem}
 .screen .body{flex:1}
 .tabs{display:flex;gap:.4rem;background:var(--carte);padding:.3rem;border-radius:999px;border:1px solid var(--ligne)}
 .tabs button{font:inherit;font-size:.88rem;border:0;background:transparent;color:var(--doux);padding:.45rem .9rem;border-radius:999px;cursor:pointer}
-.tabs button[aria-selected="true"]{background:var(--majorelle);color:#fff}
+.tabs button[aria-selected="true"]{background:#2438A6;color:#fff}
 .demo .cap{font-size:.85rem;color:var(--doux);text-align:center;max-width:30ch;margin:0}
 
 /* Offres */
@@ -179,9 +179,9 @@ section{padding:clamp(4rem,9vw,7rem) 0}
 @media (max-width:900px){.packs{grid-template-columns:1fr}.pack.featured{transform:none}}
 
 /* Secteurs */
-.sectors{background:var(--menthe);color:#E3F0EA}
+.sectors{background:#1F5545;color:#E6F2EC}
 .sectors h2{color:#fff}
-.sectors .intro{color:#BCD8CC}
+.sectors .intro{color:#E6F2EC}
 .chips{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:2.4rem}
 .chips span{border:1.5px solid rgba(255,255,255,.35);border-radius:999px;padding:.6rem 1.15rem;font-size:1rem;color:#fff}
 
