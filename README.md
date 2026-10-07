@@ -12,3 +12,9 @@ Site statique (un seul fichier `index.html`), prêt pour Cloudflare Pages.
 ## Déploiement
 GitHub → Cloudflare Pages → Connect to Git → choisir le dépôt
 Framework preset : None · Build command : (vide) · Output directory : /
+
+## SEO
+- Si l'adresse Cloudflare n'est pas `bab-web.pages.dev` (ou quand tu auras ton domaine), remplace
+  `https://bab-web.pages.dev` partout dans `index.html`, `robots.txt` et `sitemap.xml`.
+- Remplace aussi le téléphone et l'email dans le bloc `application/ld+json` de `index.html`.
+- Après la mise en ligne : ajoute le site dans Google Search Console et envoie `sitemap.xml`.
