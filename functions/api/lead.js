@@ -57,6 +57,13 @@ export async function onRequestPost(context) {
     return json({ ok: false, error: 'Adresse email invalide.' }, 400);
   }
 
+  // Aucun canal configuré : on renvoie une erreur pour que le site bascule sur WhatsApp
+  const telegramOk = env.TELEGRAM_BOT_TOKEN && env.TELEGRAM_CHAT_ID;
+  const emailOk = env.RESEND_API_KEY && env.FROM_EMAIL && env.OWNER_EMAIL;
+  if (!telegramOk && !emailOk) {
+    return json({ ok: false, error: 'Notifications non configurées.' }, 503);
+  }
+
   // Le traitement continue après la réponse : le visiteur n'attend pas l'IA
   context.waitUntil(traiter(lead, env));
   return json({ ok: true });
