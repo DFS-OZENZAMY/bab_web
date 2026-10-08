@@ -37,14 +37,23 @@ export function interpoler(texte, site, { texteBrut = false } = {}) {
   });
 }
 
-/** Comme interpoler, puis échappe pour le HTML et transforme *mots* en <em>mots</em>. */
-export function html(texte, site) {
-  return esc(interpoler(texte, site)).replace(/\*([^*]+)\*/g, '<em>$1</em>');
+/**
+ * Comme interpoler, puis échappe pour le HTML et applique deux mises en forme simples :
+ *   *mots*               → <em>mots</em>
+ *   [texte](/adresse)    → lien (dans un nouvel onglet si `nouvelOnglet: true`)
+ */
+export function html(texte, site, { nouvelOnglet = false } = {}) {
+  const cible = nouvelOnglet ? ' target="_blank" rel="noopener"' : '';
+  return esc(interpoler(texte, site))
+    .replace(/\*([^*]+)\*/g, '<em>$1</em>')
+    .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, `<a href="$2"${cible}>$1</a>`);
 }
 
-/** Version texte (sans *…*) pour les balises meta, le JSON-LD et llms.txt. */
+/** Version texte (sans mise en forme) pour les balises meta, le JSON-LD et llms.txt. */
 export function brut(texte, site) {
-  return interpoler(texte, site, { texteBrut: true }).replace(/\*([^*]+)\*/g, '$1');
+  return interpoler(texte, site, { texteBrut: true })
+    .replace(/\*([^*]+)\*/g, '$1')
+    .replace(/\[([^\]]+)\]\([^)\s]+\)/g, '$1');
 }
 
 /** Lien WhatsApp, avec message prérempli optionnel. */

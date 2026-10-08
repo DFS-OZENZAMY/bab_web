@@ -13,6 +13,7 @@ import { fileURLToPath } from 'node:url';
 
 import { accueil } from '../src/pages/accueil.js';
 import { introuvable } from '../src/pages/introuvable.js';
+import { mentionsLegales } from '../src/pages/mentions-legales.js';
 import { robotsTxt, sitemapXml, llmsTxt, manifeste } from '../src/seo/fichiers.js';
 import { verifierDonnees, verifierSortie } from './verifications.mjs';
 
@@ -64,6 +65,7 @@ export async function construire({ silencieux = false } = {}) {
   const pages = {
     'index.html': accueil(site, { css, js }),
     '404.html': introuvable(site, { polices }),
+    'mentions-legales.html': mentionsLegales(site, { css }),
     'robots.txt': robotsTxt(site),
     'sitemap.xml': sitemapXml(site),
     'llms.txt': llmsTxt(site),

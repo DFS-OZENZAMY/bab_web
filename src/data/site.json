@@ -306,7 +306,7 @@
     "titre": "Parlons de votre site.",
     "intro": "Décrivez votre activité en quelques mots. Je vous réponds avec une proposition et un prix sous 24 heures.",
     "formulaireTitre": "Demande de devis gratuite",
-    "consentement": "J'accepte que Bab Web utilise ces informations pour me recontacter au sujet de ma demande (loi 09-08).",
+    "consentement": "J'accepte que Bab Web utilise ces informations pour me recontacter au sujet de ma demande ([loi 09-08](/mentions-legales#donnees-personnelles)).",
     "bouton": "Envoyer ma demande"
   },
   "llms": {
@@ -318,5 +318,19 @@
       "Le nom de domaine est enregistré au nom du client, qui reçoit tous les accès.",
       "Devis gratuit sous 24 heures."
     ]
+  },
+  "mentionsLegales": {
+    "_note": "Informations affichées sur /mentions-legales. Les champs vides sont simplement masqués.",
+    "responsable": "",
+    "adresse": "",
+    "identifiant": "",
+    "declarationCndp": "",
+    "conservation": "3 ans à compter de notre dernier échange, puis les données sont supprimées",
+    "hebergeur": {
+      "nom": "Cloudflare, Inc.",
+      "adresse": "101 Townsend Street, San Francisco, CA 94107, États-Unis",
+      "site": "https://www.cloudflare.com"
+    },
+    "derniereMiseAJour": "2026-10-08"
   }
 }

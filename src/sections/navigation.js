@@ -9,13 +9,14 @@ export const LIENS = [
   ['faq', 'Questions'],
 ];
 
-export const navigation = site => `
+// `racine` = '/' sur les autres pages, pour que les liens ramènent aux sections de l'accueil.
+export const navigation = (site, { racine = '' } = {}) => `
 <nav class="nav" aria-label="Navigation principale">
   <div class="wrap">
-    <a class="logo" href="#top" aria-label="${esc(site.site.nom)}, accueil">${logo()}${esc(site.site.nom)}</a>
+    <a class="logo" href="${racine || '#top'}" aria-label="${esc(site.site.nom)}, accueil">${logo()}${esc(site.site.nom)}</a>
     <ul>
-      ${LIENS.map(([ancre, libelle]) => `<li><a href="#${ancre}">${esc(libelle)}</a></li>`).join('\n      ')}
+      ${LIENS.map(([ancre, libelle]) => `<li><a href="${racine}#${ancre}">${esc(libelle)}</a></li>`).join('\n      ')}
     </ul>
-    <a class="btn" href="#contact">Demander un devis</a>
+    <a class="btn" href="${racine}#contact">Demander un devis</a>
   </div>
 </nav>`;

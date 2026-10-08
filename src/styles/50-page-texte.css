@@ -1,0 +1,117 @@
+/* Pages de texte (mentions légales) : colonne de lecture confortable. */
+
+.page-texte {
+  padding: clamp(2.5rem, 6vw, 4.5rem) 0 clamp(4rem, 8vw, 6rem);
+}
+
+.page-texte .wrap {
+  max-width: 760px;
+}
+
+.page-texte .fil {
+  font-size: .88rem;
+  color: var(--doux);
+  margin: 0 0 1.2rem;
+}
+
+.page-texte .fil a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.page-texte h1 {
+  font-size: clamp(2.1rem, 5vw, 3rem);
+  font-weight: 800;
+  text-wrap: balance;
+}
+
+.page-texte .maj {
+  color: var(--doux);
+  font-size: .92rem;
+  margin: .8rem 0 2rem;
+}
+
+.sommaire {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin-bottom: 1rem;
+}
+
+.sommaire a {
+  font-size: .88rem;
+  text-decoration: none;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--majorelle) 8%, transparent);
+  padding: .4rem .85rem;
+  border-radius: 999px;
+}
+
+.sommaire a:hover {
+  background: color-mix(in srgb, var(--majorelle) 15%, transparent);
+}
+
+.page-texte section {
+  padding: 0;
+  margin-top: 2.6rem;
+  padding-top: 2.2rem;
+  border-top: 1px solid var(--ligne);
+}
+
+.page-texte h2 {
+  max-width: none;
+  font-size: clamp(1.5rem, 3.4vw, 1.9rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.page-texte h3 {
+  font-size: 1.12rem;
+  font-weight: 700;
+  margin: 1.6rem 0 .45rem;
+}
+
+.page-texte p,
+.page-texte li {
+  max-width: 68ch;
+}
+
+.page-texte p {
+  margin: 0 0 .9rem;
+}
+
+.page-texte ul {
+  padding-left: 1.2rem;
+  margin: 0 0 .9rem;
+  display: grid;
+  gap: .45rem;
+}
+
+.page-texte a:not(.btn) {
+  color: var(--accent);
+  text-underline-offset: 3px;
+}
+
+.page-texte strong {
+  font-weight: 500;
+  color: var(--encre);
+}
+
+.page-texte .retour {
+  margin-top: 3rem;
+}
+
+/* Le lien vers la loi 09-08 dans le formulaire de devis */
+label.check a {
+  color: var(--safran-l);
+  text-underline-offset: 2px;
+}
+
+footer a {
+  color: inherit;
+  text-underline-offset: 3px;
+}
+
+footer a:hover {
+  color: #fff;
+}

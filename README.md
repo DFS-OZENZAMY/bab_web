@@ -36,7 +36,7 @@ src/
   sections/             HTML de chaque section de la page
   illustrations/        dessins SVG (arche, lanterne, médina, icônes)
   scripts/              JavaScript du navigateur (démo, formulaire)
-  pages/                assemblage des pages (accueil, 404, balises <head>)
+  pages/                assemblage des pages (accueil, mentions légales, 404, balises <head>)
   seo/                  données Google, llms.txt, robots.txt, sitemap
   lib/                  outils partagés (prix, échappement HTML)
 public/                 fichiers copiés tels quels (polices, icônes, image de partage)

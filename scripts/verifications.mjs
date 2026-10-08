@@ -10,7 +10,7 @@ const exiger = (condition, message) => { if (!condition) throw new ErreurDonnees
 
 /** Contrôle le contenu de src/data/site.json. */
 export function verifierDonnees(site) {
-  for (const cle of ['site', 'seo', 'contact', 'hero', 'demos', 'offres', 'secteurs', 'methode', 'faq', 'contactSection', 'llms']) {
+  for (const cle of ['site', 'seo', 'contact', 'hero', 'demos', 'offres', 'secteurs', 'methode', 'faq', 'contactSection', 'llms', 'mentionsLegales']) {
     exiger(site[cle], `site.json : la rubrique « ${cle} » est manquante.`);
   }
   exiger(/^https:\/\/[^/]+$/.test(site.site.url), `site.json : site.url doit ressembler à « https://exemple.ma » (sans / à la fin). Valeur actuelle : ${site.site.url}`);
@@ -30,6 +30,8 @@ export function verifierDonnees(site) {
   for (const o of site.offres.options) exiger(iconesOptions.includes(o.icone), `site.json : icône d’option inconnue « ${o.icone} ». Disponibles : ${iconesOptions.join(', ')}`);
   for (const s of site.secteurs.liste) exiger(iconesSecteurs.includes(s.icone), `site.json : icône de secteur inconnue « ${s.icone} » (${s.nom}). Disponibles : ${iconesSecteurs.join(', ')}`);
   for (const e of site.methode.etapes) exiger(illustrationsEtapes.includes(e.illustration), `site.json : illustration d’étape inconnue « ${e.illustration} ». Disponibles : ${illustrationsEtapes.join(', ')}`);
+  exiger(/^\d{4}-\d{2}-\d{2}$/.test(site.mentionsLegales.derniereMiseAJour), 'site.json : mentionsLegales.derniereMiseAJour doit être au format AAAA-MM-JJ.');
+  exiger(site.mentionsLegales.conservation, 'site.json : mentionsLegales.conservation (durée de conservation des données) est obligatoire.');
   exiger(site.demos.length > 0, 'site.json : il faut au moins une démo dans « demos ».');
   exiger(new Set(site.demos.map(d => d.id)).size === site.demos.length, 'site.json : deux démos ont le même id.');
 }
@@ -49,6 +51,17 @@ export function verifierSortie(pages, site) {
   for (const [, ancre] of page.matchAll(/href="#([^"]+)"/g)) {
     exiger(ids.has(ancre), `index.html : le lien « #${ancre} » ne mène à aucune section (id introuvable).`);
   }
+  // Liens entre pages : « /mentions-legales#donnees-personnelles » doit mener à une page et une ancre existantes
+  const pagesHtml = Object.entries(pages).filter(([nom]) => nom.endsWith('.html'));
+  for (const [nom, contenu] of pagesHtml) {
+    exiger(!/\{(prix|villes)[^}]*\}|undefined|\[object Object\]|NaN/.test(contenu), `${nom} contient une valeur non remplacée.`);
+    for (const [, chemin, ancre] of contenu.matchAll(/href="\/([a-z0-9-]*)(?:#([^"]+))?"/g)) {
+      const cible = chemin ? `${chemin}.html` : 'index.html';
+      exiger(pages[cible] || chemin.includes('.'), `${nom} : le lien « /${chemin} » mène à une page qui n'existe pas.`);
+      if (ancre && pages[cible]) exiger(pages[cible].includes(`id="${ancre}"`), `${nom} : le lien « /${chemin}#${ancre} » mène à une section introuvable.`);
+    }
+  }
+
   for (const f of site.offres.formules) {
     exiger(pages['llms.txt'].includes(f.nom), `llms.txt : la formule « ${f.nom} » est absente.`);
   }

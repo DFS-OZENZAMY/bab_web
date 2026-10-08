@@ -63,6 +63,7 @@ Le build refuse de publier si :
 | `{prix:essentiel}`, `{prix:business}`, `{prix:premium}` | Le prix de la formule, ex. « 1 500 DH » |
 | `{villes}` | La liste `villes`, ex. « Casablanca, Rabat, Marrakech… » |
 | `*mots*` | Mots en italique accentué (utilisé dans le titre principal) |
+| `[texte](/adresse)` | Lien, ex. `[loi 09-08](/mentions-legales#donnees-personnelles)` |
 
 ---
 
@@ -79,6 +80,8 @@ Le build refuse de publier si :
 **Changer une couleur** : `src/styles/02-variables.css` (penser aussi aux valeurs du mode sombre juste en dessous).
 
 **Passer sur un nom de domaine** : modifier `site.url` dans `site.json` (ex. `https://babweb.ma`). Balises, données Google, `robots.txt`, `sitemap.xml`, `llms.txt` et emails sont mis à jour automatiquement.
+
+**Mentions légales** (`/mentions-legales`) : page générée par `src/pages/mentions-legales.js`. Les informations variables sont dans `site.json` → `mentionsLegales` : exploitant, adresse, identifiant (ICE ou numéro d'auto-entrepreneur), numéro de déclaration CNDP, durée de conservation des données, hébergeur. Un champ laissé vide est simplement masqué. Mettre à jour `mentionsLegales.derniereMiseAJour` à chaque changement. Si un prestataire change (par exemple un autre service d'emails que Resend), modifier la liste « Qui reçoit vos données » dans le fichier de la page. La mention « loi 09-08 » du formulaire renvoie vers `/mentions-legales#donnees-personnelles` (lien écrit `[texte](/adresse)` dans `contactSection.consentement`).
 
 **Après une modification de contenu** : mettre à jour `site.derniereMiseAJour` (utilisé par le sitemap).
 
@@ -264,7 +267,7 @@ Après chaque changement : Deployments → Retry deployment.
 - Aucune clé ni mot de passe n'est stocké dans le dépôt. Les clés sont uniquement dans les variables chiffrées de Cloudflare.
 - Les tokens GitHub et clés Cloudflare partagés pendant la création du site doivent être supprimés et recréés si besoin.
 - Pour donner un accès temporaire au dépôt : token GitHub « fine-grained », limité au dépôt `bab_web`, permission Contents en lecture/écriture, expiration courte.
-- Formulaire : case de consentement conforme à la loi 09-08. Prévoir une politique de confidentialité et, selon le traitement, une déclaration auprès de la CNDP.
+- Formulaire : case de consentement avec lien vers la politique de données personnelles (`/mentions-legales#donnees-personnelles`). Selon le traitement, une déclaration auprès de la CNDP peut être nécessaire ; son numéro s'ajoute dans `site.json` → `mentionsLegales.declarationCndp`.
 - Seul le dossier généré `dist/` est publié : la documentation, les sources (`src/`) et le code de `functions/` ne sont pas accessibles depuis le site.
 
 ---

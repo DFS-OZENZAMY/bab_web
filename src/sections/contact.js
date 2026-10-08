@@ -36,7 +36,7 @@ export function contact(site) {
       </label>
       <label class="full">Votre activité<textarea name="message" placeholder="Ex. : restaurant de cuisine marocaine, je veux afficher mon menu et recevoir des réservations."></textarea></label>
       <label class="hp" aria-hidden="true">Ne pas remplir<input name="site_web_hp" tabindex="-1" autocomplete="off"></label>
-      <label class="check full"><input type="checkbox" name="consentement" value="oui"> ${esc(c.consentement)}</label>
+      <label class="check full"><input type="checkbox" name="consentement" value="oui"> <span>${html(c.consentement, site, { nouvelOnglet: true })}</span></label>
       <button class="btn full" type="submit">${esc(c.bouton)}</button>
       <p class="form-note full" role="status"></p>
     </form>

@@ -43,6 +43,8 @@ createServer(async (req, res) => {
   let chemin = normalize(decodeURIComponent(new URL(req.url, 'http://x').pathname)).replace(/^(\.\.[/\\])+/, '');
   if (chemin.endsWith('/')) chemin += 'index.html';
   let fichier = join(DIST, chemin);
+  // Comme Cloudflare : /mentions-legales sert mentions-legales.html
+  if (!extname(fichier)) fichier = await stat(`${fichier}.html`).then(() => `${fichier}.html`, () => fichier);
   try {
     if ((await stat(fichier)).isDirectory()) fichier = join(fichier, 'index.html');
     res.writeHead(200, { 'content-type': TYPES[extname(fichier)] || 'application/octet-stream' });

@@ -5,7 +5,7 @@ export const piedDePage = site => `
 <footer>
   <div class="wrap">
     <span>© <span data-annee>${new Date().getFullYear()}</span> ${esc(site.site.nom)}, création de sites vitrines au Maroc</span>
-    <span>${esc(site.site.statut)}</span>
+    <span><a href="/mentions-legales">Mentions légales et données personnelles</a> · ${esc(site.site.statut)}</span>
   </div>
 </footer>
 

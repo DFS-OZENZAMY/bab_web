@@ -3,8 +3,8 @@ import { esc, brut } from '../lib/texte.js';
 
 const POLICES = ['bricolage', 'readex', 'readex-arabe', 'instrument-italic'];
 
-export function tete(site, { titre, description, indexer = true, css = '', extra = '' }) {
-  const url = `${site.site.url}/`;
+export function tete(site, { titre, description, chemin = '/', indexer = true, css = '', extra = '' }) {
+  const url = `${site.site.url}${chemin}`;
   const t = esc(brut(titre, site));
   const d = esc(brut(description, site));
   return `<head>
