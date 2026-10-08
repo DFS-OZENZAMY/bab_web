@@ -16,6 +16,7 @@ import { introuvable } from '../src/pages/introuvable.js';
 import { mentionsLegales } from '../src/pages/mentions-legales.js';
 import { robotsTxt, sitemapXml, llmsTxt, manifeste } from '../src/seo/fichiers.js';
 import { verifierDonnees, verifierSortie } from './verifications.mjs';
+import { dessinerFavicon } from '../src/illustrations/favicon.js';
 
 const RACINE = join(dirname(fileURLToPath(import.meta.url)), '..');
 const SRC = join(RACINE, 'src');
@@ -60,7 +61,9 @@ export async function construire({ silencieux = false } = {}) {
   const fichiersCss = await lireDossier(join(SRC, 'styles'), '.css');
   const css = minifierCss(fichiersCss.join('\n'));
   const polices = minifierCss(fichiersCss[0]); // 01-polices.css, réutilisé par la page 404
-  const js = `(()=>{\n${alleger((await lireDossier(join(SRC, 'scripts'), '.js')).join('\n'))}\n})();`;
+  // dessinerFavicon est partagée : elle dessine favicon.svg ici et sert à l'animation dans le navigateur
+  const scripts = [`const dessinerFavicon = ${dessinerFavicon.toString()};`, ...await lireDossier(join(SRC, 'scripts'), '.js')];
+  const js = `(()=>{\n${alleger(scripts.join('\n'))}\n})();`;
 
   const pages = {
     'index.html': accueil(site, { css, js }),
@@ -70,6 +73,7 @@ export async function construire({ silencieux = false } = {}) {
     'sitemap.xml': sitemapXml(site),
     'llms.txt': llmsTxt(site),
     'site.webmanifest': manifeste(site),
+    'favicon.svg': dessinerFavicon() + '\n',
   };
   verifierSortie(pages, site);
 

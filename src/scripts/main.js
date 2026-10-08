@@ -5,4 +5,5 @@
   document.querySelectorAll('[data-annee]').forEach(el => { el.textContent = new Date().getFullYear(); });
   initialiserDemo(config);
   initialiserDevis(config);
+  initialiserFavicon();
 })();

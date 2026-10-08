@@ -83,6 +83,8 @@ Le build refuse de publier si :
 
 **Mentions légales** (`/mentions-legales`) : page générée par `src/pages/mentions-legales.js`. Les informations variables sont dans `site.json` → `mentionsLegales` : exploitant, adresse, identifiant (ICE ou numéro d'auto-entrepreneur), numéro de déclaration CNDP, durée de conservation des données, hébergeur. Un champ laissé vide est simplement masqué. Mettre à jour `mentionsLegales.derniereMiseAJour` à chaque changement. Si un prestataire change (par exemple un autre service d'emails que Resend), modifier la liste « Qui reçoit vos données » dans le fichier de la page. La mention « loi 09-08 » du formulaire renvoie vers `/mentions-legales#donnees-personnelles` (lien écrit `[texte](/adresse)` dans `contactSection.consentement`).
 
+**Favicon animé** : dessiné par `src/illustrations/favicon.js` (le build en tire `favicon.svg`) et animé par `src/scripts/favicon.js` (l'étoile scintille et la porte s'éclaire toutes les 6 secondes environ). Visible dans Chrome, Edge et Firefox ; Safari affiche l'icône fixe. L'animation s'arrête quand l'onglet est en arrière-plan et quand le visiteur a activé « réduire les animations ». Durée et pause se règlent en haut de `src/scripts/favicon.js`. `favicon-32.png` (icône de secours) est une copie fixe à régénérer si le dessin change.
+
 **Après une modification de contenu** : mettre à jour `site.derniereMiseAJour` (utilisé par le sitemap).
 
 ---
